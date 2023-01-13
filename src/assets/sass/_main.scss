@@ -1,0 +1,220 @@
+@use "variables" as v;
+@use "mixin" as m;
+
+.ly_header {
+  padding-top: v.$sp_3;
+  border-bottom: v.$li_base;
+}
+.ly_header_inner {
+  @include m.ly_centered;
+}
+.ly_footer {
+  padding-top: v.$sp_3;
+  padding-bottom: v.$sp_3;
+  background-color: v.$co_primary;
+}
+.ly_footer_inner {
+  @include m.ly_centered;
+}
+.ly_cont {
+  @include m.ly_centered;
+  padding-top: v.$sp_7;
+  padding-bottom: v.$sp_7;
+}
+.bl_contsUnit {
+  display: flex;
+  flex-direction: column;
+  gap: v.$sp_4;
+}
+.bl_cta {
+  padding: v.$sp_3;
+  background-color: rgba(221, 116, 44, 0.05);
+  border: 1px solid #e25c00;
+  text-align: center;
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+  &_ttl {
+    padding-bottom: v.$sp_1;
+    margin-bottom: v.$sp_2;
+    border-bottom: 1px solid currentColor;
+    color: #e25c00;
+    font-size: 1.4rem;
+    font-weight: bold;
+  }
+}
+.bl_faq {
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+  &_q,
+  &_a {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    box-sizing: content-box;
+    min-height: v.$sp_5;
+    padding-left: v.$sp_7;
+  }
+  &_q {
+    margin-bottom: v.$sp_2;
+    font-size: 1.125rem;
+    font-weight: bold;
+    &_txt {
+      padding-top: v.$sp_1;
+    }
+    & > .bl_faq_icon {
+      background-color: v.$co_warning;
+      color: #fff;
+    }
+  }
+  &_a {
+    padding-bottom: v.$sp_2;
+    margin-bottom: v.$sp_2;
+    border-bottom: v.$li_base;
+    &_body {
+      padding-top: v.$sp_1;
+      & > *:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &_txt {
+      margin-bottom: v.$sp_2;
+    }
+    & > .bl_faq_icon {
+      background-color: #efefef;
+      color: v.$co_warning;
+    }
+  }
+  &_icon {
+    $size: 45px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    font-weight: normal;
+    line-height: $size;
+    text-align: center;
+  }
+}
+.bl_fieldsetUnit {
+  display: flex;
+  flex-direction: column;
+  gap: v.$sp_8;
+}
+.bl_fieldset_ttl {
+  width: 100%;
+}
+.bl_horizBtnList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: v.$sp_2;
+}
+.bl_cardUnit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$sp_1;
+}
+.bl_card {
+  display: flex;
+  flex-direction: column;
+  gap: v.$sp_1;
+  border: 1px solid v.$co_darkGray;
+  border-radius: 4px;
+  padding: v.$sp_2 v.$sp_1;
+  background-color: #fff;
+}
+.el_lv1Heading {
+  padding: v.$sp_3 v.$sp_1;
+  background-color: v.$co_primary;
+  color: #fff;
+  font-size: 1.75rem;
+  text-align: center;
+  > span {
+    position: relative;
+    display: inline-block;
+    transform: translateY(-20%);
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 80px;
+      height: 1px;
+      background-color: currentColor;
+      transform: translateX(-50%);
+    }
+  }
+}
+.el_lv2heading {
+  padding-bottom: 4px;
+  margin-bottom: v.$sp_4;
+  border-bottom: 4px solid v.$co_accent;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+.el_lv3heading {
+  display: inline;
+  font-weight: bold;
+}
+.el_warningHeading {
+  padding-bottom: v.$sp_1;
+  border-bottom: 4px solid currentColor;
+  color: v.$co_warning;
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+.el_note {
+  font-size: v.$fo_sizeSm;
+}
+.el_btn {
+  @include m.el_btn_base(v.$co_secondary);
+}
+.el_roundedBtn {
+  @include m.el_btn_base(v.$co_secondary);
+  border-radius: 10px;
+}
+.el_label {
+  display: inline-block;
+  padding: 0.2em 0.9em;
+  background-color: v.$co_success;
+  color: #fff;
+  font-size: v.$fo_sizeXs;
+  font-weight: bold;
+  border-radius: 1em;
+  vertical-align: middle;
+}
+.el_inputBase {
+  @include m.el_input;
+  width: 100%;
+  appearance: none;
+}
+.el_inputInline {
+  @include m.el_input;
+  appearance: none;
+}
+.el_inputSelect {
+  @include m.el_input;
+  width: 100%;
+}
+.el_textareaBase {
+  @include m.el_input;
+  width: 100%;
+  appearance: none;
+}
+.el_labelCheckbox {
+  &:focus,
+  &:hover {
+    color: v.$co_info;
+    transition: v.$tr_speed;
+  }
+}
+.el_footerCopyright {
+  color: #fff;
+}
+.hp_bgcBase {
+  background-color: v.$co_lightGray;
+}
