@@ -8,6 +8,12 @@
   margin-left: auto;
 }
 
+@mixin bl_LyCol1($gap: 16px) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
 @mixin el_btn_base($color: #e25c00) {
   display: inline-block;
   width: v.$wi_btnBase;

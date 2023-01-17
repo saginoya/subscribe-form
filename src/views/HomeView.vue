@@ -1,440 +1,291 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// Layout components
+import LyCont from "@/components/LyCont.vue";
+
+// Block components
+import BlContsUnit from "@/components/BlContsUnit.vue";
+import BlFaq from "@/components/BlFaq.vue";
+import BlFaqA from "@/components/BlFaqA.vue";
+import BlFaqQ from "@/components/BlFaqQ.vue";
+import BlCta from "@/components/BlCta.vue";
+import BlFormItemUnit from "@/components/BlFormItemUnit.vue";
+import BlFieldset from "@/components/BlFieldset.vue";
+import BlInputGroup from "@/components/BlInputGroup.vue";
+import BlCardUnit from "@/components/BlCardUnit.vue";
+import BlCard from "@/components/BlCard.vue";
+import BlHorizBtnList from "@/components/BlHorizBtnList.vue";
+
+// Elemnt components
+import ElChip from "@/components/ElChip.vue";
+import ElNote from "@/components/ElNote.vue";
+import ElBtn from "@/components/ElBtn.vue";
+import ElInput from "@/components/ElInput.vue";
+import ElInputSelection from "@/components/ElInputSelection.vue";
+import ElSelect from "@/components/ElSelect.vue";
+import ElTextarea from "@/components/ElTextarea.vue";
+</script>
 
 <template>
   <article>
-    <section class="ly_cont">
-      <div class="bl_contsUnit">
+    <LyCont>
+      <BlContsUnit>
         <h2 class="el_warningHeading">お申し込みについてご注意</h2>
-        <dl class="bl_faq">
-          <dt class="bl_faq_q">
-            <span class="bl_faq_icon">Q</span>
-            <span class="bl_faq_q_txt">年間購読のお申し込みの流れについて</span>
-          </dt>
-          <dd class="bl_faq_a">
-            <span class="bl_faq_icon">A</span>
-            <div class="bl_faq_a_body">
-              <p class="bl_faq_a_txt">
-                前納制となりますので、先に請求書をお送りし、ご入金確認後の発送となります。
-              </p>
-            </div>
-            <!-- /.bl_faq_a_body -->
-          </dd>
-          <dt class="bl_faq_q">
-            <span class="bl_faq_icon">Q</span>
-            <span class="bl_faq_q_txt">購読開始月について</span>
-          </dt>
-          <dd class="bl_faq_a">
-            <span class="bl_faq_icon">A</span>
-            <div class="bl_faq_a_body">
-              <p class="bl_faq_a_txt">
-                ご指定が無ければ、お申し込み月からの開始となります。
-              </p>
-            </div>
-            <!-- /.bl_faq_a_body -->
-          </dd>
-          <dt class="bl_faq_q">
-            <span class="bl_faq_icon">Q</span>
-            <span class="bl_faq_q_txt">その他の指定について</span>
-          </dt>
-          <dd class="bl_faq_a">
-            <span class="bl_faq_icon">A</span>
-            <div class="bl_faq_a_body">
-              <p class="bl_faq_a_txt">
-                連絡事項などにつきましては、備考欄にご記入をお願いいたします。（請求先・送付先を別途ご指定など）
-              </p>
-            </div>
-            <!-- /.bl_faq_a_body -->
-          </dd>
-        </dl>
-        <address class="bl_cta">
-          <h2 class="bl_cta_ttl">お問い合わせ</h2>
-          <p class="bl_cta_txt">
+        <BlFaq>
+          <BlFaqQ>年間購読のお申し込みの流れについて</BlFaqQ>
+          <BlFaqA>
+            <p>
+              前納制となりますので、先に請求書をお送りし、ご入金確認後の発送となります。
+            </p>
+          </BlFaqA>
+          <BlFaqQ>購読開始月について</BlFaqQ>
+          <BlFaqA>
+            <p>ご指定が無ければ、お申し込み月からの開始となります。</p>
+          </BlFaqA>
+          <BlFaqQ>その他の指定について</BlFaqQ>
+          <BlFaqA>
+            <p>
+              連絡事項などにつきましては、備考欄にご記入をお願いいたします。
+            </p>
+            <p>（請求先・送付先を別途ご指定など）</p>
+          </BlFaqA>
+        </BlFaq>
+        <BlCta title="お問い合わせ">
+          <p>
             その他、不明な点などあれば以下のメールアドレスまでご連絡ください。<br />
             hambai@create-nippo.co.jp
           </p>
-        </address>
-      </div>
-    </section>
-    <section class="ly_cont hp_bgcBase">
+        </BlCta>
+      </BlContsUnit>
+    </LyCont>
+    <LyCont class="hp_bgcBase">
       <form method="post">
-        <div class="bl_fieldsetUnit">
-          <fieldset class="bl_fieldset">
-            <legend class="bl_fieldset_ttl">
+        <BlFormItemUnit>
+          <BlFieldset>
+            <template v-slot:title>
               <h2 class="el_lv2heading">お客様情報</h2>
-            </legend>
-            <div class="bl_contsUnit">
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="name">会社名・組織名・個人名</label>
-                  </h3>
-                  <span class="el_label">必須</span>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    class="el_inputBase"
-                    placeholder="株式会社日報ビジネス"
-                  />
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="department">所属部署・ご担当者氏名</label>
-                  </h3>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <input
-                    type="text"
-                    name="department"
-                    class="el_inputBase"
-                    id="department"
-                    placeholder="出版部&emsp;田中太郎"
-                  />
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="business-type">業種</label>
-                  </h3>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <select
-                    name="business-type"
-                    id="business-type"
-                    class="el_inputSelect"
-                  >
-                    <option>選択してください</option>
-                    <optgroup label="哺乳類">
-                      <option>いぬ</option>
-                      <option>ねこ</option>
-                    </optgroup>
-                    <optgroup label="爬虫類">
-                      <option>トカゲ</option>
-                      <option>ヘビ</option>
-                    </optgroup>
-                  </select>
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="phone">電話番号</label>
-                  </h3>
-                  <span class="el_label">必須</span>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <input
-                    type="tel"
-                    name="phone"
-                    id="phone"
-                    class="el_inputBase"
-                    required
-                    placeholder="03-3262-3465"
-                  />
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="fax">FAX番号</label>
-                  </h3>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <input
-                  type="tel"
-                  name="fax"
-                  id="fax"
-                  class="el_inputBase"
-                  placeholder="03-3263-2560"
-                />
-              </div>
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="email">メールアドレス</label>
-                  </h3>
-                  <span class="el_label">必須</span>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    class="el_inputBase"
-                    required
-                    placeholder=""
-                  />
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-            </div>
-            <!-- /.bl_contsUnit -->
-          </fieldset>
-          <fieldset class="bl_fieldset">
-            <legend class="bl_fieldset_ttl">
+            </template>
+            <BlInputGroup
+              title="会社名・組織名・個人名"
+              id="name"
+              :required="true"
+            >
+              <ElInput
+                type="text"
+                id="name"
+                placeholder="株式会社日報ビジネス"
+                :required="true"
+              ></ElInput>
+            </BlInputGroup>
+            <BlInputGroup title="所属部署・ご担当者氏名" id="department">
+              <ElInput
+                type="text"
+                id="department"
+                placeholder="出版部&emsp;田中太郎"
+              ></ElInput>
+            </BlInputGroup>
+            <BlInputGroup title="業種" id="business-type" :required="true">
+              <ElSelect id="business-type">
+                <option>選択してください</option>
+                <optgroup label="哺乳類">
+                  <option>いぬ</option>
+                  <option>ねこ</option>
+                </optgroup>
+                <optgroup label="爬虫類">
+                  <option>トカゲ</option>
+                  <option>ヘビ</option>
+                </optgroup>
+              </ElSelect>
+            </BlInputGroup>
+            <BlInputGroup title="電話番号" id="phone" :required="true">
+              <ElInput
+                type="tel"
+                id="phone"
+                placeholder="03-3262-3465"
+                :required="true"
+              ></ElInput>
+            </BlInputGroup>
+            <BlInputGroup title="FAX番号" id="fax">
+              <ElInput type="tel" id="fax" placeholder="03-3263-2560"></ElInput>
+            </BlInputGroup>
+            <BlInputGroup title="メールアドレス" id="email" :required="true">
+              <ElInput
+                type="email"
+                id="email"
+                placeholder="sample@sample.com"
+                :required="true"
+              ></ElInput>
+            </BlInputGroup>
+          </BlFieldset>
+          <BlFieldset>
+            <template v-slot:title>
               <h2 class="el_lv2heading">発送先ご住所</h2>
-            </legend>
-            <div class="bl_contsUnit">
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="post-code">郵便番号</label>
-                  </h3>
-                  <span class="el_label">必須</span>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <input
-                    type="text"
-                    name="post-code"
-                    id="post-code"
-                    class="el_inputBase"
-                    required
-                    pattern="^[0-9]{3}-[0-9]{4}$"
-                    title="半角数字とハイフン（-）で入力してください"
-                    placeholder="101-0061"
-                  />
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="address-level">都道府県・市町村・番地</label>
-                  </h3>
-                  <span class="el_label">必須</span>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <input
-                    type="text"
-                    name="address-level"
-                    id="address-level"
-                    class="el_inputBase"
-                    required
-                    placeholder="東京都千代田区神田三崎町3-1-5"
-                  />
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="address-line">建物名・部屋番号など</label>
-                  </h3>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <input
-                    type="text"
-                    name="address-line"
-                    id="address-line"
-                    class="el_inputBase"
-                    placeholder="神田三崎町ビル1階"
-                  />
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-            </div>
-            <!-- /.bl_contsUnit -->
-          </fieldset>
-          <fieldset class="bl_fieldset">
-            <legend class="bl_fieldset_ttl">
+            </template>
+            <BlInputGroup title="郵便番号" id="post-code" :required="true">
+              <ElInput
+                type="text"
+                id="post-code"
+                placeholder="101-0061"
+                :required="true"
+                pattern="^[0-9]{3}-[0-9]{4}$"
+                title="半角数字とハイフン（-）で入力してください"
+              ></ElInput>
+            </BlInputGroup>
+            <BlInputGroup
+              title="都道府県・市町村・番地"
+              id="address-level"
+              :required="true"
+            >
+              <ElInput
+                type="text"
+                id="address-level"
+                placeholder="東京都千代田区神田三崎町3-1-5"
+                :required="true"
+              ></ElInput>
+            </BlInputGroup>
+            <BlInputGroup
+              title="建物名・部屋番号など"
+              id="address-line"
+              :required="true"
+            >
+              <ElInput
+                type="text"
+                id="address-line"
+                placeholder="神田三崎町ビル1階"
+              ></ElInput>
+            </BlInputGroup>
+          </BlFieldset>
+          <BlFieldset>
+            <template v-slot:title>
               <h2 class="el_lv2heading">ご希望について</h2>
-            </legend>
-            <div class="bl_contsUnit">
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    ご希望の誌・紙をチェックして下さい
-                  </h3>
-                  <span class="el_label">必須</span>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <ul class="bl_cardUnit">
-                    <li class="bl_card">
-                      <p>
-                        <label class="el_labelCheckbox">
-                          <input
-                            type="checkbox"
-                            name="magazines[]"
-                            class="el_inputChecbox"
-                            value="ht"
-                          />
-                          週刊&nbsp;包装タイムス
-                        </label>
-                      </p>
-                      <p>
-                        <label
-                          >購読開始月<input
-                            type="month"
-                            name="ht-month"
-                            class="el_inputInline"
-                        /></label>
-                      </p>
-                      <p>
-                        <label
-                          >部数<input
-                            type="number"
-                            name="ht-number"
-                            class="el_inputInline"
-                            min="1"
-                        /></label>
-                      </p>
-                    </li>
-                    <li class="bl_card">
-                      <p>
-                        <label class="el_labelCheckbox">
-                          <input
-                            type="checkbox"
-                            name="magazines[]"
-                            class="el_inputChecbox"
-                            value="fp"
-                          />
-                          月刊&nbsp;食品包装
-                        </label>
-                      </p>
-                      <p>
-                        <label
-                          >購読開始月<input
-                            type="month"
-                            name="fp-month"
-                            class="el_inputInline"
-                            disabled
-                        /></label>
-                      </p>
-                      <p>
-                        <label
-                          >部数<input
-                            type="number"
-                            name="fp-number"
-                            class="el_inputInline"
-                            min="1"
-                            disabled
-                        /></label>
-                      </p>
-                    </li>
-                    <li class="bl_card">
-                      <p>
-                        <label for="magazines-ht" class="el_labelCheckbox">
-                          <input
-                            type="checkbox"
-                            name="magazines[]"
-                            id="magazines-ht"
-                            class="el_inputChecbox"
-                            value="jk"
-                          />
-                          週刊&nbsp;循環経済新聞
-                        </label>
-                      </p>
-                      <p>
-                        <label
-                          >購読開始月<input
-                            type="month"
-                            name="jk-month"
-                            class="el_inputInline"
-                            disabled
-                        /></label>
-                      </p>
-                      <p>
-                        <label
-                          >部数<input
-                            type="number"
-                            name="jk-number"
-                            class="el_inputInline"
-                            min="1"
-                            disabled
-                        /></label>
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">DM送付について</h3>
-                  <span class="el_label">必須</span>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <label
-                    ><input
-                      type="radio"
-                      name="dm"
-                      class="el_inputRadio"
-                      checked
-                      required
-                    />希望する</label
-                  >
-                  <label
-                    ><input
-                      type="radio"
-                      name="dm"
-                      class="el_inputRadio"
-                    />希望しない</label
-                  >
-                  <p class="el_note">
-                    日報グループの業務のご案内をさせていただくことがあります。
+            </template>
+            <BlInputGroup
+              title="ご希望の誌・紙をチェックして下さい"
+              :required="true"
+            >
+              <BlCardUnit>
+                <BlCard>
+                  <p>
+                    <ElInputSelection
+                      type="checkbox"
+                      id="magazines[]"
+                      value="ht"
+                    >
+                      週刊&nbsp;包装タイムス
+                    </ElInputSelection>
                   </p>
-                </div>
-              </div>
-              <div class="bl_inputGroup">
-                <div class="bl_inputGroup_ttl">
-                  <h3 class="el_lv3heading">
-                    <label for="remarks">備考欄</label>
-                  </h3>
-                </div>
-                <!-- /.bl_inputGroup_ttl -->
-                <div class="bl_inputGroup_conts">
-                  <textarea
-                    type="text"
-                    name="remarks"
-                    id="remarks"
-                    class="el_textareaBase"
-                  ></textarea>
-                  <p class="el_note">
-                    連絡事項があればご記入ください。（請求先・送付先を別途ご指定など）
+                  <p>
+                    <label>
+                      購読開始月
+                      <ElInput
+                        type="month"
+                        id="ht-month"
+                        :inline="true"
+                      ></ElInput>
+                    </label>
                   </p>
-                </div>
-                <!-- /.bl_inputGroup_conts -->
-              </div>
-              <!-- /.bl_inputGroup -->
-            </div>
-            <!-- /.bl_contsUnit -->
-          </fieldset>
-          <ul class="bl_horizBtnList">
+                  <p>
+                    <label>
+                      部数
+                      <ElInput
+                        type="number"
+                        id="ht-number"
+                        :inline="true"
+                        min="1"
+                      ></ElInput>
+                    </label>
+                  </p>
+                </BlCard>
+                <BlCard>
+                  <p>
+                    <ElInputSelection
+                      type="checkbox"
+                      id="magazines[]"
+                      value="fp"
+                    >
+                      月刊&nbsp;食品包装
+                    </ElInputSelection>
+                  </p>
+                  <p>
+                    <label>
+                      購読開始月
+                      <ElInput
+                        type="month"
+                        id="fp-month"
+                        :inline="true"
+                      ></ElInput>
+                    </label>
+                  </p>
+                  <p>
+                    <label>
+                      部数
+                      <ElInput
+                        type="number"
+                        id="fp-number"
+                        :inline="true"
+                        min="1"
+                      ></ElInput>
+                    </label>
+                  </p>
+                </BlCard>
+                <BlCard>
+                  <p>
+                    <ElInputSelection
+                      type="checkbox"
+                      id="magazines[]"
+                      value="jk"
+                    >
+                      週刊&nbsp;循環経済新聞
+                    </ElInputSelection>
+                  </p>
+                  <p>
+                    <label>
+                      購読開始月
+                      <ElInput
+                        type="month"
+                        id="jk-month"
+                        :inline="true"
+                      ></ElInput>
+                    </label>
+                  </p>
+                  <p>
+                    <label>
+                      部数
+                      <ElInput
+                        type="number"
+                        id="jk-number"
+                        :inline="true"
+                        min="1"
+                      ></ElInput>
+                    </label>
+                  </p>
+                </BlCard>
+              </BlCardUnit>
+            </BlInputGroup>
+            <BlInputGroup title="DM送付について">
+              <ElInputSelection type="radio" id="dm" value="希望する" checked>
+                希望する
+              </ElInputSelection>
+              <ElInputSelection type="radio" id="dm" value="希望しない">
+                希望しない
+              </ElInputSelection>
+              <ElNote>
+                日報グループの業務のご案内をさせていただくことがあります。
+              </ElNote>
+            </BlInputGroup>
+            <BlInputGroup title="備考欄" id="remarks">
+              <ElTextarea id="remarks" rows="3"></ElTextarea>
+              <ElNote>
+                連絡事項があればご記入ください。（請求先・送付先を別途ご指定など）
+              </ElNote>
+            </BlInputGroup>
+          </BlFieldset>
+          <BlHorizBtnList>
             <li>
-              <button type="submit" class="el_roundedBtn">
-                入力内容の確認
-              </button>
+              <ElBtn type="submit"> 入力内容の確認 </ElBtn>
             </li>
-          </ul>
-        </div>
-        <!-- /.bl_fieldsetUnit -->
+          </BlHorizBtnList>
+        </BlFormItemUnit>
       </form>
-    </section>
+    </LyCont>
   </article>
 </template>
