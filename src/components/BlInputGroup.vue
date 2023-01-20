@@ -1,10 +1,32 @@
 <script setup lang="ts">
 import ElChip from "@/components/ElChip.vue";
+import ElInput from "@/components/ElInput.vue";
 
 const props = defineProps<{
-  title: string;
+  label: string;
   id?: string;
   required?: boolean;
+  type?:
+    | "email"
+    | "color"
+    | "date"
+    | "datetime"
+    | "datetime-local"
+    | "hidden"
+    | "month"
+    | "number"
+    | "password"
+    | "range"
+    | "search"
+    | "tel"
+    | "text"
+    | "time"
+    | "url"
+    | "week";
+  autocomplete?: string;
+  placeholder?: string;
+  title?: string;
+  inputmode?: string;
 }>();
 </script>
 
@@ -12,16 +34,27 @@ const props = defineProps<{
   <div class="bl_inputGroup">
     <p>
       <label v-if="props.id" class="bl_inputGroup_ttl" :for="props.id">
-        {{ props.title }}
+        {{ props.label }}
       </label>
       <span v-else class="bl_inputGroup_ttl">
-        {{ props.title }}
+        {{ props.label }}
       </span>
       <ElChip v-if="props.required">必須</ElChip>
     </p>
     <!-- /.bl_inputGroup_ttl -->
     <div class="bl_inputGroup_conts">
-      <slot> </slot>
+      <slot>
+        <ElInput
+          v-if="props.type && props.id"
+          :type="props.type"
+          :inputmode="props.inputmode"
+          :id="props.id"
+          :autocomplete="props.autocomplete"
+          :placeholder="props.placeholder"
+          :required="props.required"
+          :title="props.title"
+        ></ElInput>
+      </slot>
     </div>
     <!-- /.bl_inputGroup_conts -->
   </div>

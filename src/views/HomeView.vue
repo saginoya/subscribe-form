@@ -62,30 +62,27 @@ import ElTextarea from "@/components/ElTextarea.vue";
             <h2 class="el_lv2heading">お客様情報</h2>
           </template>
           <BlInputGroup
-            title="個人氏名・ご担当者様氏名"
+            label="個人氏名・ご担当者様氏名"
             id="name"
             :required="true"
-          >
-            <ElInput
-              type="text"
-              id="name"
-              autocomplete="name"
-              placeholder="日報太郎"
-              :required="true"
-            ></ElInput>
-          </BlInputGroup>
-          <BlInputGroup title="企業名・団体名" id="organization">
-            <ElInput
-              type="text"
-              id="organization"
-              autocomplete="organization"
-              placeholder="株式会社日報ビジネス"
-            ></ElInput>
-          </BlInputGroup>
-          <BlInputGroup title="所属部署など" id="department">
-            <ElInput type="text" id="department" placeholder="出版部"></ElInput>
-          </BlInputGroup>
-          <BlInputGroup title="業種" id="business-type" :required="true">
+            type="text"
+            autocomplete="name"
+            placeholder="日報太郎"
+          ></BlInputGroup>
+          <BlInputGroup
+            label="企業名・団体名"
+            id="organization"
+            type="text"
+            autocomplete="organization"
+            placeholder="株式会社日報ビジネス"
+          ></BlInputGroup>
+          <BlInputGroup
+            label="所属部署など"
+            id="department"
+            type="text"
+            placeholder="出版部"
+          ></BlInputGroup>
+          <BlInputGroup label="業種" id="business-type" :required="true">
             <ElSelect id="business-type">
               <option>選択してください</option>
               <optgroup label="哺乳類">
@@ -98,96 +95,78 @@ import ElTextarea from "@/components/ElTextarea.vue";
               </optgroup>
             </ElSelect>
           </BlInputGroup>
-          <BlInputGroup title="電話番号" id="tel" :required="true">
-            <ElInput
-              type="tel"
-              id="tel"
-              autocomplete="tel-national"
-              inputmode="tel"
-              placeholder="03-3262-3465"
-              :required="true"
-            ></ElInput>
-          </BlInputGroup>
-          <BlInputGroup title="FAX番号" id="fax">
-            <ElInput
-              type="tel"
-              id="fax"
-              inputmode="tel"
-              placeholder="03-3263-2560"
-            ></ElInput>
-          </BlInputGroup>
-          <BlInputGroup title="メールアドレス" id="email" :required="true">
-            <ElInput
-              type="email"
-              id="email"
-              autocomplete="email"
-              inputmode="email"
-              placeholder="sample@sample.com"
-              :required="true"
-            ></ElInput>
-          </BlInputGroup>
+          <BlInputGroup
+            label="電話番号"
+            id="tel"
+            :required="true"
+            type="tel"
+            autocomplete="tel-national"
+            inputmode="tel"
+            placeholder="03-3262-3465"
+          ></BlInputGroup>
+          <BlInputGroup
+            label="FAX番号"
+            id="fax"
+            type="tel"
+            inputmode="tel"
+            placeholder="03-3263-2560"
+          ></BlInputGroup>
+          <BlInputGroup
+            label="メールアドレス"
+            id="email"
+            :required="true"
+            type="email"
+            autocomplete="email"
+            inputmode="email"
+            placeholder="sample@sample.com"
+          ></BlInputGroup>
         </BlFieldset>
         <BlFieldset>
           <template v-slot:title>
             <h2 class="el_lv2heading">発送先ご住所</h2>
           </template>
-          <BlInputGroup title="郵便番号" id="postal-code" :required="true">
-            <ElInput
-              type="text"
-              id="postal-code"
-              autocomplete="postal-code"
-              inputmode="numeric"
-              placeholder="101-0061"
-              :required="true"
-              pattern="^[0-9]{3}-[0-9]{4}$"
-              title="半角数字とハイフン（-）で入力してください"
-            ></ElInput>
+          <BlInputGroup
+            label="郵便番号"
+            id="postal-code"
+            :required="true"
+            type="text"
+            autocomplete="postal-code"
+            inputmode="numeric"
+            placeholder="101-0061"
+            pattern="^[0-9]{3}-[0-9]{4}$"
+            title="半角数字とハイフン（-）で入力してください"
+          >
           </BlInputGroup>
           <BlInputGroup
-            title="都道府県・市町村"
+            label="都道府県・市町村"
             id="address-level"
             :required="true"
-          >
-            <ElInput
-              type="text"
-              id="address-level"
-              autocomplete="address-level1 address-level2"
-              placeholder="東京都千代田区神田三崎町"
-              :required="true"
-            ></ElInput>
-          </BlInputGroup>
+            type="text"
+            autocomplete="address-level1 address-level2"
+            placeholder="東京都千代田区神田三崎町"
+          ></BlInputGroup>
           <BlInputGroup
-            title="番地・丁目・号など"
+            label="番地・丁目・号など"
             id="address-line1"
             :required="true"
-          >
-            <ElInput
-              type="text"
-              id="address-line1"
-              autocomplete="address-line1"
-              placeholder="3-1-5"
-              :required="true"
-            ></ElInput>
-          </BlInputGroup>
+            type="text"
+            autocomplete="address-line1"
+            placeholder="3-1-5"
+          ></BlInputGroup>
           <BlInputGroup
-            title="建物名・部屋番号など"
+            label="建物名・部屋番号など"
             id="address-line2"
-            :required="true"
-          >
-            <ElInput
-              type="text"
-              id="address-line2"
-              autocomplete="address-line2"
-              placeholder="神田三崎町ビル1階"
-            ></ElInput>
-          </BlInputGroup>
+            type="text"
+            autocomplete="address-line2"
+            placeholder="神田三崎町ビル1階"
+          ></BlInputGroup>
         </BlFieldset>
         <BlFieldset>
           <template v-slot:title>
             <h2 class="el_lv2heading">ご希望について</h2>
           </template>
           <BlInputGroup
-            title="ご希望の誌・紙をチェックして下さい"
+            label="ご希望の誌・紙をチェックして下さい"
             :required="true"
           >
             <BlCardUnit>
@@ -280,7 +259,7 @@ import ElTextarea from "@/components/ElTextarea.vue";
               </BlCard>
             </BlCardUnit>
           </BlInputGroup>
-          <BlInputGroup title="DM送付について">
+          <BlInputGroup label="DM送付について">
             <ElInputSelection type="radio" id="dm" value="希望する" checked>
               希望する
             </ElInputSelection>
@@ -291,7 +270,7 @@ import ElTextarea from "@/components/ElTextarea.vue";
               日報グループの業務のご案内をさせていただくことがあります。
             </ElNote>
           </BlInputGroup>
-          <BlInputGroup title="備考欄" id="remarks">
+          <BlInputGroup label="備考欄" id="remarks">
             <ElTextarea
               id="remarks"
               rows="5"
