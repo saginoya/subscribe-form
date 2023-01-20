@@ -1,8 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import BlFaqA from "@/components/BlFaqA.vue";
+import BlFaqQ from "@/components/BlFaqQ.vue";
+</script>
 
 <template>
   <dl class="bl_faq">
-    <slot></slot>
+    <slot>
+      <BlFaqQ>Question</BlFaqQ>
+      <BlFaqA>
+        <p>Answer</p>
+      </BlFaqA>
+    </slot>
   </dl>
 </template>
 
