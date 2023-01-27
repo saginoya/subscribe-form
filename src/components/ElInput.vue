@@ -20,9 +20,16 @@ type Props = {
   id: string;
   required?: boolean;
   inline?: boolean;
+  modelValue?: string;
 };
 
 const props = defineProps<Props>();
+const emits = defineEmits<{ (e: "update:modelValue", text: string): void }>();
+
+const onInputText = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  emits("update:modelValue", target.value);
+};
 </script>
 
 <template>
@@ -33,6 +40,8 @@ const props = defineProps<Props>();
     :class="props.inline ? 'el_inputInline' : 'el_inputBase'"
     :required="props.required"
     :aria-required="props.required"
+    :value="modelValue"
+    @input="onInputText"
   />
 </template>
 

@@ -2,7 +2,16 @@
 const props = defineProps<{
   id: string;
   required?: boolean;
+  modelValue?: string;
 }>();
+
+const emits = defineEmits<{ (e: "update:modelValue", text: string): void }>();
+
+const onInputText = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  console.log(target);
+  emits("update:modelValue", target.value);
+};
 </script>
 
 <template>
@@ -12,6 +21,8 @@ const props = defineProps<{
     class="el_textareaBase"
     :required="props.required"
     :aria-required="props.required"
+    :value="modelValue"
+    @input="onInputText"
   ></textarea>
 </template>
 

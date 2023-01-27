@@ -1,25 +1,34 @@
 <script setup lang="ts">
 type Props = {
-  type: "checkbox" | "radio";
   id: string;
   value: string;
   required?: boolean;
   checked?: boolean;
+  modelValue?: string;
 };
 
 const props = defineProps<Props>();
+const emits = defineEmits<{ (e: "update:modelValue", text: string): void }>();
+
+const onInputText = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  const returnValue = target.checked ? target.value : "";
+  emits("update:modelValue", returnValue);
+};
 </script>
 
 <template>
   <label class="el_inputSelection_label">
     <input
-      :type="props.type"
+      type="checkbox"
+      :id="props.id"
       :name="props.id"
       class="el_inputSelection"
       :value="props.value"
       :required="props.required"
       :aria-required="props.required"
-      :checked="props.checked"
+      :checked="props.modelValue?.includes(props.value)"
+      @input="onInputText"
     />
     <slot></slot>
   </label>

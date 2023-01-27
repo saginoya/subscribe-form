@@ -27,7 +27,15 @@ const props = defineProps<{
   placeholder?: string;
   title?: string;
   inputmode?: string;
+  modelValue?: string;
 }>();
+
+const emits = defineEmits<{ (e: "update:modelValue", text: string): void }>();
+
+const onInputText = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  emits("update:modelValue", target.value);
+};
 </script>
 
 <template>
@@ -53,6 +61,8 @@ const props = defineProps<{
           :placeholder="props.placeholder"
           :required="props.required"
           :title="props.title"
+          :value="modelValue"
+          @input="onInputText"
         ></ElInput>
       </slot>
     </div>
