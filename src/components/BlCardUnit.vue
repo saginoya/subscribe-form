@@ -12,5 +12,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: v.$sp_1;
+  &:deep(> li) {
+    width: (v.$wi_blockMax / 3) - (v.$sp_1 * 2);
+  }
 }
 </style>
