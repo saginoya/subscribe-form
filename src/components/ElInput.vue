@@ -20,11 +20,13 @@ type Props = {
   id: string;
   required?: boolean;
   inline?: boolean;
-  modelValue?: string;
+  modelValue?: string | number;
 };
 
 const props = defineProps<Props>();
-const emits = defineEmits<{ (e: "update:modelValue", text: string): void }>();
+const emits = defineEmits<{
+  (e: "update:modelValue", text: string | number): void;
+}>();
 
 const onInputText = (e: Event) => {
   const target = e.target as HTMLInputElement;

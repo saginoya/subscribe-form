@@ -28,6 +28,7 @@ const props = defineProps<{
   title?: string;
   inputmode?: string;
   modelValue?: string;
+  readonly?: boolean;
 }>();
 
 const emits = defineEmits<{ (e: "update:modelValue", text: string): void }>();
@@ -60,6 +61,7 @@ const onInputText = (e: Event) => {
           :autocomplete="props.autocomplete"
           :placeholder="props.placeholder"
           :required="props.required"
+          :readonly="props.readonly"
           :title="props.title"
           :value="modelValue"
           @input="onInputText"
