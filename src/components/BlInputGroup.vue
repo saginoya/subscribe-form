@@ -41,7 +41,7 @@ const onInputText = (e: Event) => {
 
 <template>
   <div class="bl_inputGroup">
-    <p>
+    <p class="bl_inputGroup_header">
       <label v-if="props.id" class="bl_inputGroup_ttl" :for="props.id">
         {{ props.label }}
       </label>
@@ -75,6 +75,13 @@ const onInputText = (e: Event) => {
 
 <style scoped lang="scss">
 .bl_inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  &_header {
+    display: flex;
+    gap: 4px;
+  }
   &_ttl {
     font-weight: bold;
   }
