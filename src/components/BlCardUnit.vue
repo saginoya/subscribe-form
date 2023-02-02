@@ -9,11 +9,16 @@
 <style scoped lang="scss">
 @use "@/assets/sass/variables" as v;
 .bl_cardUnit {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: v.$sp_1;
-  &:deep(> li) {
-    width: (v.$wi_blockMax / 3) - (v.$sp_1 * 2);
-  }
+}
+.bl_cardUnitCol2 {
+  grid-template-columns: 1fr 1fr;
+}
+.bl_cardUnitCol3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.bl_cardUnitCol4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 </style>
