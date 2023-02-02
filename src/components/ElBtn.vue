@@ -1,7 +1,22 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+
+const props = defineProps<{
+  color?: "gray";
+}>();
+
+const className = ref("el_roundedBtn");
+switch (props.color) {
+  case "gray":
+    className.value = "el_roundeBtnGray";
+    break;
+  default:
+    break;
+}
+</script>
 
 <template>
-  <button class="el_roundedBtn">
+  <button :class="className">
     <slot></slot>
   </button>
 </template>
@@ -38,6 +53,10 @@ $color: green !default;
 }
 .el_roundedBtn {
   @include el_btn_base($color);
+  border-radius: 10px;
+}
+.el_roundeBtnGray {
+  @include el_btn_base(#aaa);
   border-radius: 10px;
 }
 </style>
