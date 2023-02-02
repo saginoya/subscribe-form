@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { inject } from "vue";
+import type { CustomerInfo, Magazine } from "@/interfaces";
 
 // Layout components
 import LyCont from "@/components/LyCont.vue";
@@ -10,7 +11,6 @@ import BlFormItemUnit from "@/components/BlFormItemUnit.vue";
 import BlFieldset from "@/components/BlFieldset.vue";
 import BlInputGroup from "@/components/BlInputGroup.vue";
 import BlHorizBtnList from "@/components/BlHorizBtnList.vue";
-import BlDialog from "@/components/BlDialog.vue";
 import BlCardUnit from "@/components/BlCardUnit.vue";
 import BlCard from "@/components/BlCard.vue";
 
@@ -28,79 +28,8 @@ import PartsNoticeList from "@/components/PartsNoticeList.vue";
 import PartsContacts from "@/components/PartsContacts.vue";
 import PartsBusinessTypeSelect from "@/components/PartsBusinessTypeSelect.vue";
 
-const confirmationDialog = ref();
-const submit = (): void => {
-  confirmationDialog.value.openDialog();
-};
-
-// Inputs item
-const name = ref<string>();
-const organization = ref<string>();
-const department = ref<string>();
-const businessType = ref<string>("選択してください");
-const tel = ref<string>();
-const fax = ref<string>();
-const email = ref<string>();
-const postalCode = ref<string>();
-const addressLevel = ref<string>();
-const addressLine1 = ref<string>();
-const addressLine2 = ref<string>();
-const magazines = ref<string[]>([]);
-const dm = ref<string>("希望する");
-const remarks = ref<string>();
-
-interface Magazine {
-  cat: "hoso" | "kankyo";
-  id: string;
-  name: string;
-  explanation: string;
-}
-
-const magazinesChoices: Array<Magazine> = [
-  {
-    id: "ht",
-    name: "週刊　包装タイムス",
-    explanation: "包装タイムスは1966年創刊の包装専門新聞です",
-    cat: "hoso",
-  },
-  {
-    id: "fp",
-    name: "月刊　食品包装",
-    explanation: "食品包装の専門情報誌",
-    cat: "hoso",
-  },
-  {
-    id: "cb",
-    name: "月刊　カートンボックス",
-    explanation: "「箱創り」を応援するビジネスマッチングマガジン",
-    cat: "hoso",
-  },
-  {
-    id: "jk",
-    name: "週刊　循環経済新聞",
-    explanation: "処理・処分から資源循環、環境保全まで幅広く紹介した新聞",
-    cat: "kankyo",
-  },
-  {
-    id: "rd",
-    name: "月刊　廃棄物",
-    explanation:
-      "ごみ処理・リサイクルの実際的な解決方法を具体的に紹介する廃棄物問題の総合誌",
-    cat: "kankyo",
-  },
-  {
-    id: "econ",
-    name: "隔月刊 イーコンテクチャー",
-    explanation: "建廃・解体・エコ施工の専門誌",
-    cat: "kankyo",
-  },
-  {
-    id: "gw",
-    name: "隔月刊 地球温暖化",
-    explanation: "「脱炭素社会実現」を目指す提言誌",
-    cat: "kankyo",
-  },
-];
+const magazineList = inject<Magazine[]>("magazineList");
+const customerInfo = inject<CustomerInfo>("customerInfo");
 </script>
 
 <template>
@@ -112,8 +41,8 @@ const magazinesChoices: Array<Magazine> = [
     </BlContsUnit>
   </LyCont>
   <LyCont class="hp_bgcBase">
-    <form method="post" @submit.prevent="submit()" action="/">
-      <BlFormItemUnit>
+    <form method="post" @submit.prevent="$router.push('confirm')" action="/">
+      <BlFormItemUnit v-if="customerInfo">
         <BlFieldset>
           <template v-slot:title>
             <h2 class="el_lv2heading">お客様情報</h2>
@@ -125,7 +54,7 @@ const magazinesChoices: Array<Magazine> = [
             type="text"
             autocomplete="name"
             placeholder="日報太郎"
-            v-model="name"
+            v-model="customerInfo.name"
           ></BlInputGroup>
           <BlInputGroup
             label="企業名・団体名"
@@ -133,17 +62,22 @@ const magazinesChoices: Array<Magazine> = [
             type="text"
             autocomplete="organization"
             placeholder="株式会社日報ビジネス"
-            v-model="organization"
+            v-model="customerInfo.organization"
           ></BlInputGroup>
           <BlInputGroup
             label="所属部署など"
             id="department"
             type="text"
             placeholder="出版部"
-            v-model="department"
+            v-model="customerInfo.department"
           ></BlInputGroup>
           <BlInputGroup label="業種" id="business-type" :required="true">
-            <ElSelect id="business-type" v-model="businessType">
+            <ElSelect
+              id="business-type"
+              v-model="customerInfo.businessType"
+              :required="true"
+              aria-placeholder="貴社の業種などを選択してください"
+            >
               <PartsBusinessTypeSelect></PartsBusinessTypeSelect>
             </ElSelect>
           </BlInputGroup>
@@ -155,7 +89,7 @@ const magazinesChoices: Array<Magazine> = [
             autocomplete="tel-national"
             inputmode="tel"
             placeholder="03-3262-3465"
-            v-model="tel"
+            v-model="customerInfo.tel"
           ></BlInputGroup>
           <BlInputGroup
             label="FAX番号"
@@ -163,7 +97,7 @@ const magazinesChoices: Array<Magazine> = [
             type="tel"
             inputmode="tel"
             placeholder="03-3263-2560"
-            v-model="fax"
+            v-model="customerInfo.fax"
           ></BlInputGroup>
           <BlInputGroup
             label="メールアドレス"
@@ -173,7 +107,7 @@ const magazinesChoices: Array<Magazine> = [
             autocomplete="email"
             inputmode="email"
             placeholder="sample@sample.com"
-            v-model="email"
+            v-model="customerInfo.email"
           ></BlInputGroup>
         </BlFieldset>
         <BlFieldset>
@@ -190,7 +124,7 @@ const magazinesChoices: Array<Magazine> = [
             placeholder="101-0061"
             pattern="^[0-9]{3}-[0-9]{4}$"
             title="半角数字とハイフン（-）で入力してください"
-            v-model="postalCode"
+            v-model="customerInfo.postalCode"
           >
           </BlInputGroup>
           <BlInputGroup
@@ -200,7 +134,7 @@ const magazinesChoices: Array<Magazine> = [
             type="text"
             autocomplete="address-level1 address-level2"
             placeholder="東京都千代田区神田三崎町"
-            v-model="addressLevel"
+            v-model="customerInfo.addressLevel"
           ></BlInputGroup>
           <BlInputGroup
             label="番地・丁目・号など"
@@ -209,7 +143,7 @@ const magazinesChoices: Array<Magazine> = [
             type="text"
             autocomplete="address-line1"
             placeholder="3-1-5"
-            v-model="addressLine1"
+            v-model="customerInfo.addressLine1"
           ></BlInputGroup>
           <BlInputGroup
             label="建物名・部屋番号など"
@@ -217,7 +151,7 @@ const magazinesChoices: Array<Magazine> = [
             type="text"
             autocomplete="address-line2"
             placeholder="神田三崎町ビル1階"
-            v-model="addressLine2"
+            v-model="customerInfo.addressLine2"
           ></BlInputGroup>
         </BlFieldset>
         <BlFieldset>
@@ -228,19 +162,16 @@ const magazinesChoices: Array<Magazine> = [
             label="ご希望の誌・紙をチェックして下さい"
             :required="true"
           >
-            <BlCardUnit>
-              <BlCard
-                v-for="(magazine, index) in magazinesChoices"
-                :key="magazine.id"
-              >
+            <BlCardUnit class="bl_cardUnitCol3">
+              <BlCard v-for="magazine in magazineList" :key="magazine.id">
                 <template v-slot:header>
                   <p>
                     <ElInputCheckbox
                       type="checkbox"
-                      :id="`${magazine.id}`"
-                      :value="magazine.name"
-                      v-model="magazines[index]"
+                      :id="magazine.id"
+                      value="購入"
                       :aria-describedby="`${magazine.id}-note`"
+                      v-model="magazine.buyInfo.buy"
                     >
                       {{ magazine.name }}
                     </ElInputCheckbox>
@@ -255,8 +186,10 @@ const magazinesChoices: Array<Magazine> = [
                     <ElInput
                       type="month"
                       :id="`${magazine.id}-month`"
+                      :disabled="!magazine.buyInfo.buy"
                       :inline="true"
-                      :disabled="!magazines.includes(magazine.name)"
+                      :step="magazine.bimonthly ? 2 : 1"
+                      v-model="magazine.buyInfo.month"
                     ></ElInput>
                   </label>
                 </p>
@@ -266,10 +199,11 @@ const magazinesChoices: Array<Magazine> = [
                     <ElInput
                       type="number"
                       :id="`${magazine.id}-number`"
+                      :disabled="!magazine.buyInfo.buy"
                       inputmode="numeric"
                       :inline="true"
                       min="1"
-                      :disabled="!magazines.includes(magazine.name)"
+                      v-model="magazine.buyInfo.number"
                     ></ElInput>
                   </label>
                 </p>
@@ -277,10 +211,10 @@ const magazinesChoices: Array<Magazine> = [
             </BlCardUnit>
           </BlInputGroup>
           <BlInputGroup label="DM送付について">
-            <ElInputRadio id="dm" value="希望する" v-model="dm">
+            <ElInputRadio id="dm" value="希望する" v-model="customerInfo.dm">
               希望する
             </ElInputRadio>
-            <ElInputRadio id="dm" value="希望しない" v-model="dm">
+            <ElInputRadio id="dm" value="希望しない" v-model="customerInfo.dm">
               希望しない
             </ElInputRadio>
             <ElNote>
@@ -291,27 +225,22 @@ const magazinesChoices: Array<Magazine> = [
             <ElTextarea
               id="remarks"
               rows="5"
-              v-model="remarks"
+              v-model="customerInfo.remarks"
               aria-describedby="aboutRemarks"
             >
             </ElTextarea>
             <ElNote id="aboutRemarks">
               連絡事項があればご記入ください。（請求先・送付先を別途ご指定など）
             </ElNote>
-            <p>{{ remarks }}</p>
+            <p>{{ customerInfo.remarks }}</p>
           </BlInputGroup>
         </BlFieldset>
         <BlHorizBtnList>
           <li>
-            <ElBtn type="submit"> 入力内容の確認 </ElBtn>
+            <ElBtn type="submit">入力内容の確認</ElBtn>
           </li>
         </BlHorizBtnList>
       </BlFormItemUnit>
     </form>
   </LyCont>
-  <BlDialog ref="confirmationDialog">
-    <template v-slot:header>
-      <h1>入力内容のご確認</h1>
-    </template>
-  </BlDialog>
 </template>
