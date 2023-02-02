@@ -1,6 +1,9 @@
 @use "variables" as v;
 @use "mixin" as m;
 
+body.is_scrollLock {
+  overflow-y: hidden;
+}
 .ly_header {
   padding-top: v.$sp_3;
   border-bottom: v.$li_base;
