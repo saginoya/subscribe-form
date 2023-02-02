@@ -90,7 +90,6 @@ const businessTypeChoices: Array<BusinessType> = [
 </script>
 
 <template>
-  <option disabled>選択してください</option>
   <optgroup
     v-for="category in businessTypeChoices"
     :key="category.catId"
