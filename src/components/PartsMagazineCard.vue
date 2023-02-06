@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject } from "vue";
+import { inject } from "vue";
 import type { Magazine } from "@/interfaces";
 
 import BlCardUnit from "@/components/BlCardUnit.vue";

@@ -1,8 +1,4 @@
-<script setup lang="ts">
-const props = defineProps({
-  title: { type: String, required: true, default: "Call To Action" },
-});
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <address class="bl_cta">
