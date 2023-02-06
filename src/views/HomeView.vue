@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { inject } from "vue";
+import { Core as YubinBangoCore } from "yubinbango-core2";
 import type { CustomerInfo } from "@/interfaces";
 
 // Layout components
@@ -26,6 +27,17 @@ import PartsBusinessTypeSelect from "@/components/PartsBusinessTypeSelect.vue";
 import PartsMagazineCard from "@/components/PartsMagazineCard.vue";
 
 const customerInfo = inject<CustomerInfo>("customerInfo");
+
+const fetchAddress = (): void => {
+  if (customerInfo) {
+    new YubinBangoCore(customerInfo.postalCode, (value: any) => {
+      // region=都道府県, locality=市区町村, street=町域
+      const address = value.region + value.locality + value.street;
+
+      customerInfo.addressLevel = address;
+    });
+  }
+};
 </script>
 
 <template>
@@ -50,7 +62,7 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             type="text"
             autocomplete="name"
             placeholder="日報太郎"
-            v-model="customerInfo.name"
+            v-model.trim="customerInfo.name"
           ></BlInputGroup>
           <BlInputGroup
             label="企業名・団体名"
@@ -58,14 +70,14 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             type="text"
             autocomplete="organization"
             placeholder="株式会社日報ビジネス"
-            v-model="customerInfo.organization"
+            v-model.trim="customerInfo.organization"
           ></BlInputGroup>
           <BlInputGroup
             label="所属部署など"
             id="department"
             type="text"
             placeholder="出版部"
-            v-model="customerInfo.department"
+            v-model.trim="customerInfo.department"
           ></BlInputGroup>
           <BlInputGroup label="業種" id="business-type" :required="true">
             <ElSelect
@@ -85,7 +97,7 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             autocomplete="tel-national"
             inputmode="tel"
             placeholder="03-3262-3465"
-            v-model="customerInfo.tel"
+            v-model.trim="customerInfo.tel"
           ></BlInputGroup>
           <BlInputGroup
             label="FAX番号"
@@ -93,7 +105,7 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             type="tel"
             inputmode="tel"
             placeholder="03-3263-2560"
-            v-model="customerInfo.fax"
+            v-model.trim="customerInfo.fax"
           ></BlInputGroup>
           <BlInputGroup
             label="メールアドレス"
@@ -103,7 +115,7 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             autocomplete="email"
             inputmode="email"
             placeholder="sample@sample.com"
-            v-model="customerInfo.email"
+            v-model.trim="customerInfo.email"
           ></BlInputGroup>
         </BlFieldset>
         <BlFieldset>
@@ -120,7 +132,8 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             placeholder="101-0061"
             pattern="^[0-9]{3}-[0-9]{4}$"
             title="半角数字とハイフン（-）で入力してください"
-            v-model="customerInfo.postalCode"
+            v-model.trim="customerInfo.postalCode"
+            :blur="fetchAddress()"
           >
           </BlInputGroup>
           <BlInputGroup
@@ -130,7 +143,7 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             type="text"
             autocomplete="address-level1 address-level2"
             placeholder="東京都千代田区神田三崎町"
-            v-model="customerInfo.addressLevel"
+            v-model.trim="customerInfo.addressLevel"
           ></BlInputGroup>
           <BlInputGroup
             label="番地・丁目・号など"
@@ -139,7 +152,7 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             type="text"
             autocomplete="address-line1"
             placeholder="3-1-5"
-            v-model="customerInfo.addressLine1"
+            v-model.trim="customerInfo.addressLine1"
           ></BlInputGroup>
           <BlInputGroup
             label="建物名・部屋番号など"
@@ -147,7 +160,7 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             type="text"
             autocomplete="address-line2"
             placeholder="神田三崎町ビル1階"
-            v-model="customerInfo.addressLine2"
+            v-model.trim="customerInfo.addressLine2"
           ></BlInputGroup>
         </BlFieldset>
         <BlFieldset>

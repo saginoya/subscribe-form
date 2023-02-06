@@ -35,6 +35,9 @@ export interface CustomerInfo {
 export interface PostData {
   postName: string;
   postDepartment: string;
+  postTel: string;
+  postFax: string;
+  postPostalCode: string;
   postAddress: string;
   postMagazines: string[];
 }

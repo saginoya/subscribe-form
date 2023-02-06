@@ -90,10 +90,25 @@ const postDepartment = computed((): string => {
   const name = customerInfo.name;
   return organization ? [department, name].join(" ") : department;
 });
+const postTel = computed((): string => {
+  return toHalfWidth(customerInfo.tel).replace(/―/g, "-").replace(/ー/g, "-");
+});
+const postFax = computed((): string => {
+  return toHalfWidth(customerInfo.fax).replace(/―/g, "-").replace(/ー/g, "-");
+});
+const postPostalCode = computed((): string => {
+  let value = toHalfWidth(customerInfo.postalCode)
+    .replace(/―/g, "-")
+    .replace(/ー/g, "-");
+  if (value.match(/^[0-9]{7}$/)) {
+    value = value.slice(0, 3) + "-" + value.slice(3, value.length);
+  }
+  return value;
+});
 const postAddress = computed((): string => {
   const { addressLevel, addressLine1, addressLine2 } = customerInfo;
   const building = addressLine2 && ` ${addressLine2}`;
-  return addressLevel + addressLine1 + building;
+  return addressLevel + toHalfWidth(addressLine1) + toHalfWidth(building);
 });
 const postMagazines = computed((): string[] => {
   let itemList: string[] = [];
@@ -116,9 +131,24 @@ const postMagazines = computed((): string[] => {
 provide("postData", {
   postName: postName,
   postDepartment: postDepartment,
+  postTel: postTel,
+  postFax: postFax,
+  postPostalCode: postPostalCode,
   postAddress: postAddress,
   postMagazines: postMagazines,
 });
+
+const toHalfWidth = (value: string) => {
+  const halfVal = value.replace(/[！-～]/g, function (tmpStr) {
+    return String.fromCharCode(tmpStr.charCodeAt(0) - 0xfee0);
+  });
+  return halfVal
+    .replace(/”/g, '"')
+    .replace(/’/g, "'")
+    .replace(/‘/g, "`")
+    .replace(/￥/g, "\\")
+    .replace(/〜/g, "~");
+};
 </script>
 
 <template>

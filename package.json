@@ -17,7 +17,8 @@
     "css-wipe": "^4.3.0",
     "mdi-vue": "^3.0.13",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "yubinbango-core2": "^0.6.3"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
