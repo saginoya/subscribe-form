@@ -7,7 +7,7 @@ import BlCard from "@/components/BlCard.vue";
 import BlCardHeader from "@/components/BlCardHeader.vue";
 import BlCardBody from "@/components/BlCardBody.vue";
 import ElInputCheckbox from "@/components/ElInputCheckbox.vue";
-import ElNote from "@/components/ElNote.vue";
+import ElIcon from "@/components/ElIcon.vue";
 import ElInput from "@/components/ElInput.vue";
 
 const magazineList = inject<Magazine[]>("magazineList");
@@ -57,12 +57,16 @@ const catInfo = (catId: string): CatInfo => {
               {{ magazine.name }}
             </ElInputCheckbox>
           </p>
-          <ElNote class="hp_bgcBase" :id="`${magazine.id}-note`">
-            {{ magazine.explanation }}
-          </ElNote>
+          <div class="bl_card_note">
+            <ElIcon name="information-outline"></ElIcon>
+            <p :id="`${magazine.id}-note`">{{ magazine.explanation }}</p>
+          </div>
         </BlCardHeader>
         <transition name="is_active">
-          <BlCardBody v-show="magazine.buyInfo.buy">
+          <BlCardBody
+            v-show="magazine.buyInfo.buy"
+            class="bl_card_magazineBody"
+          >
             <p>
               <label>
                 購読開始月
@@ -99,6 +103,21 @@ const catInfo = (catId: string): CatInfo => {
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/sass/variables" as v;
+@use "@/assets/sass/mixin" as m;
+.bl_card_note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  color: v.$co_info;
+  font-size: 0.8rem;
+  line-height: 1rem;
+}
+.bl_card_magazineBody {
+  @include m.bl_LyCol1(8px);
+  overflow: hidden;
+}
 .el_inputMagazineNum {
   width: 5em;
 }
@@ -111,6 +130,5 @@ const catInfo = (catId: string): CatInfo => {
   height: 0;
   padding-top: 0;
   padding-bottom: 0;
-  overflow: hidden;
 }
 </style>
