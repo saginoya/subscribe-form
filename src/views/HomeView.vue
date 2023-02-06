@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from "vue";
-import type { CustomerInfo, Magazine } from "@/interfaces";
+import type { CustomerInfo } from "@/interfaces";
 
 // Layout components
 import LyCont from "@/components/LyCont.vue";
@@ -11,15 +11,11 @@ import BlFormItemUnit from "@/components/BlFormItemUnit.vue";
 import BlFieldset from "@/components/BlFieldset.vue";
 import BlInputGroup from "@/components/BlInputGroup.vue";
 import BlHorizBtnList from "@/components/BlHorizBtnList.vue";
-import BlCardUnit from "@/components/BlCardUnit.vue";
-import BlCard from "@/components/BlCard.vue";
 
 // Elemnt components
 import ElNote from "@/components/ElNote.vue";
 import ElBtn from "@/components/ElBtn.vue";
-import ElInput from "@/components/ElInput.vue";
 import ElInputRadio from "@/components/ElInputRadio.vue";
-import ElInputCheckbox from "@/components/ElInputCheckbox.vue";
 import ElSelect from "@/components/ElSelect.vue";
 import ElTextarea from "@/components/ElTextarea.vue";
 
@@ -27,8 +23,8 @@ import ElTextarea from "@/components/ElTextarea.vue";
 import PartsNoticeList from "@/components/PartsNoticeList.vue";
 import PartsContacts from "@/components/PartsContacts.vue";
 import PartsBusinessTypeSelect from "@/components/PartsBusinessTypeSelect.vue";
+import PartsMagazineCard from "@/components/PartsMagazineCard.vue";
 
-const magazineList = inject<Magazine[]>("magazineList");
 const customerInfo = inject<CustomerInfo>("customerInfo");
 </script>
 
@@ -40,9 +36,9 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
       <PartsContacts></PartsContacts>
     </BlContsUnit>
   </LyCont>
-  <LyCont class="hp_bgcBase">
+  <LyCont class="hp_bgcBase" v-if="customerInfo">
     <form method="post" @submit.prevent="$router.push('confirm')" action="/">
-      <BlFormItemUnit v-if="customerInfo">
+      <BlFormItemUnit>
         <BlFieldset>
           <template v-slot:title>
             <h2 class="el_lv2heading">お客様情報</h2>
@@ -162,53 +158,7 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
             label="ご希望の誌・紙をチェックして下さい"
             :required="true"
           >
-            <BlCardUnit class="bl_cardUnitCol3">
-              <BlCard v-for="magazine in magazineList" :key="magazine.id">
-                <template v-slot:header>
-                  <p>
-                    <ElInputCheckbox
-                      type="checkbox"
-                      :id="magazine.id"
-                      value="購入"
-                      :aria-describedby="`${magazine.id}-note`"
-                      v-model="magazine.buyInfo.buy"
-                    >
-                      {{ magazine.name }}
-                    </ElInputCheckbox>
-                  </p>
-                  <ElNote class="hp_bgcBase" :id="`${magazine.id}-note`">
-                    {{ magazine.explanation }}
-                  </ElNote>
-                </template>
-                <p>
-                  <label>
-                    購読開始月
-                    <ElInput
-                      type="month"
-                      :id="`${magazine.id}-month`"
-                      :disabled="!magazine.buyInfo.buy"
-                      :inline="true"
-                      :step="magazine.bimonthly ? 2 : 1"
-                      v-model="magazine.buyInfo.month"
-                    ></ElInput>
-                  </label>
-                </p>
-                <p>
-                  <label>
-                    部数
-                    <ElInput
-                      type="number"
-                      :id="`${magazine.id}-number`"
-                      :disabled="!magazine.buyInfo.buy"
-                      inputmode="numeric"
-                      :inline="true"
-                      min="1"
-                      v-model="magazine.buyInfo.number"
-                    ></ElInput>
-                  </label>
-                </p>
-              </BlCard>
-            </BlCardUnit>
+            <PartsMagazineCard></PartsMagazineCard>
           </BlInputGroup>
           <BlInputGroup label="DM送付について">
             <ElInputRadio id="dm" value="希望する" v-model="customerInfo.dm">
@@ -242,5 +192,8 @@ const customerInfo = inject<CustomerInfo>("customerInfo");
         </BlHorizBtnList>
       </BlFormItemUnit>
     </form>
+  </LyCont>
+  <LyCont v-else>
+    <p>エラー：入力フォームが正しく読み込まれませんでした。</p>
   </LyCont>
 </template>

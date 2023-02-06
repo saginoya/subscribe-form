@@ -91,12 +91,9 @@ const postDepartment = computed((): string => {
   return organization ? [department, name].join(" ") : department;
 });
 const postAddress = computed((): string => {
-  const address = [
-    customerInfo.addressLevel,
-    customerInfo.addressLine1,
-    customerInfo.addressLine2,
-  ];
-  return address.join(" ");
+  const { addressLevel, addressLine1, addressLine2 } = customerInfo;
+  const building = addressLine2 && ` ${addressLine2}`;
+  return addressLevel + addressLine1 + building;
 });
 const postMagazines = computed((): string[] => {
   let itemList: string[] = [];
@@ -107,10 +104,10 @@ const postMagazines = computed((): string[] => {
         ? `購読開始月：${item.buyInfo.month}`
         : "";
       const number = `部数：${item.buyInfo.number}`;
-      const buyinfo = month
+      const buyInfo = month
         ? `（${[month, number].join("・")}）`
         : `（${number}）`;
-      const text = name + buyinfo;
+      const text = name + buyInfo;
       itemList.push(text);
     }
   });

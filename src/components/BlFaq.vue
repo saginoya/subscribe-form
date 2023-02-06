@@ -15,7 +15,6 @@ import BlFaqQ from "@/components/BlFaqQ.vue";
 </template>
 
 <style scoped lang="scss">
-@use "@/assets/sass/variables" as v;
 .bl_faq {
   & > *:last-child {
     margin-bottom: 0;

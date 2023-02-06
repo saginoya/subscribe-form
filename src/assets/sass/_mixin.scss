@@ -14,9 +14,13 @@
   gap: $gap;
 }
 
+@mixin bl_CardChaild($padding: 16px 32px) {
+  padding: $padding;
+}
+
 @mixin el_input {
   font-size: v.$fo_sizeLg;
-  padding: 0.4em 0.8em;
+  padding: 0.4em 0.4em;
   border-radius: 4px;
   border: none;
   box-shadow: 0 0 0 1px #ccc inset;

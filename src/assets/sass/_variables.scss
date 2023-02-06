@@ -1,16 +1,18 @@
 // Color
-$co_primary: #00bcd4;
-$co_secondary: #4dd0e1;
-$co_accent: #fdd835;
-$co_error: #f44336;
-$co_info: #2196f3;
-$co_success: #4caf50;
-$co_warning: #ff5722;
-$co_lightGray: #f5f5f5;
-$co_darkGray: #e0e0e0;
-$co_fontBaseLight: #222;
-$co_fontBaseDark: #fff;
+$co_primary: rgb(63, 81, 181);
+$co_secondary: rgb(76, 175, 80);
+$co_accent: rgb(255, 235, 59);
+$co_error: rgb(244, 67, 54);
+$co_info: rgb(3, 169, 244);
+$co_success: rgb(0, 150, 136);
+$co_warning: rgb(255, 87, 34);
+$co_lightGray: rgb(238, 238, 238);
+$co_darkGray: rgb(158, 158, 158);
+$co_fontBaseLight: rgb(33, 33, 33);
+$co_fontBaseDark: rgb(250, 250, 250);
 $co_fontLink: #0069ff;
+$co_themeHoso: rgb(33, 150, 243);
+$co_themekankyo: rgb(76, 175, 80);
 
 // Font
 $fo_sizeXs: 0.75rem;
@@ -29,6 +31,11 @@ $sp_8: 64px;
 
 // Wide
 $wi_blockMax: 1230px;
+$wi_breakpoint_xl: 1600px;
+$wi_breakpoint_lg: 1280px;
+$wi_breakpoint_md: 960px;
+$wi_breakpoint_sm: 520px;
+$wi_breakpoint_xs: 320px;
 $wi_btnBase: 300px;
 
 // Transition

@@ -26,20 +26,32 @@ switch (props.color) {
 
 $color: v.$co_secondary;
 $color: green !default;
+$width: v.$wi_btnBase;
+$width: 300px !default;
+$padding: v.$sp_2 v.$sp_1;
+$padding: 16px 8px !default;
+$box-shadow: v.$sh_base;
+$box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16) !default;
+$font-size: v.$fo_sizeLg;
+$font-size: 1.125rem !default;
+$font-color: v.$co_fontBaseDark;
+$font-color: white !default;
+$transition-speed: v.$tr_speed;
+$transition-speed: 0.25s;
 
 @mixin el_btn_base($color: #e25c00) {
   display: inline-block;
-  width: v.$wi_btnBase;
+  width: $width;
   max-width: 100%;
-  padding: v.$sp_2 v.$sp_1;
+  padding: $padding;
   background-color: $color;
   border: 2px solid transparent;
-  box-shadow: v.$sh_base;
-  color: v.$co_fontBaseDark;
-  font-size: v.$fo_sizeLg;
+  box-shadow: $box-shadow;
+  color: $font-color;
+  font-size: $font-size;
   text-align: center;
   text-decoration: none;
-  transition: v.$tr_speed;
+  transition: $transition-speed;
   &:focus,
   &:hover {
     background-color: #fff;

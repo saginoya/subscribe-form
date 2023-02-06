@@ -74,10 +74,9 @@ const onInputText = (e: Event) => {
 </template>
 
 <style scoped lang="scss">
+@use "@/assets/sass/mixin" as m;
 .bl_inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  @include m.bl_LyCol1(4px);
   &_header {
     display: flex;
     gap: 4px;

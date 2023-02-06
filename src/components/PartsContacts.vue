@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import BlCta from "@/components/BlCta.vue";
+import ElIcon from "@/components/ElIcon.vue";
 
 const title: string = "お問い合わせ";
 const text: string =
@@ -9,6 +10,10 @@ const email: string = "hambai@create-nippo.co.jp";
 
 <template>
   <BlCta :title="title">
+    <template v-slot:title>
+      <ElIcon name="email-outline" />
+      {{ title }}
+    </template>
     <p>
       {{ text }}
     </p>

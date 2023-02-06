@@ -12,8 +12,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@mdi/js": "^7.1.96",
     "autoprefixer": "^10.4.13",
     "css-wipe": "^4.3.0",
+    "mdi-vue": "^3.0.13",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },

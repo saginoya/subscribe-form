@@ -37,6 +37,9 @@ const onInputText = (e: Event) => {
 @use "@/assets/sass/variables" as v;
 @use "@/assets/sass/mixin" as m;
 
+$color: v.$co_info;
+$color: blue !default;
+
 .el_inputSelection {
   opacity: 0;
   position: absolute;
@@ -64,8 +67,8 @@ const onInputText = (e: Event) => {
     &:has(.el_inputSelection:focus-visible),
     &:focus,
     &:hover {
-      color: v.$co_info;
-      border-color: v.$co_info;
+      color: $color;
+      border-color: $color;
       transition: 0.1s;
     }
     &:has(.el_inputSelection:checked):after {

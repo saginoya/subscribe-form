@@ -6,23 +6,27 @@ const props = defineProps({
 
 <template>
   <address class="bl_cta">
-    <h2 class="bl_cta_ttl">{{ props.title }}</h2>
+    <h2 class="bl_cta_ttl">
+      <slot name="title"></slot>
+    </h2>
     <slot></slot>
   </address>
 </template>
 
 <style scoped lang="scss">
 @use "@/assets/sass/variables" as v;
-$color: v.$co_warning;
+$color: v.$co_success;
 $color: orange !default;
+$padding: v.$sp_3;
+$padding: 24px !default;
 .bl_cta {
-  padding: v.$sp_3;
+  padding: $padding;
   background-color: rgba($color, 0.05);
   border: 1px solid $color;
-  text-align: center;
+  border-radius: 10px;
   &_ttl {
-    padding-bottom: v.$sp_1;
-    margin-bottom: v.$sp_2;
+    padding-bottom: 8px;
+    margin-bottom: 16px;
     border-bottom: 1px solid currentColor;
     color: $color;
     font-size: 1.4rem;

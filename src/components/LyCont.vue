@@ -9,9 +9,12 @@
 <style scoped lang="scss">
 @use "@/assets/sass/variables" as v;
 @use "@/assets/sass/mixin" as m;
+
+$padding: v.$sp_7;
+$padding: 32px !default;
 .ly_cont {
   @include m.ly_centered;
-  padding-top: v.$sp_7;
-  padding-bottom: v.$sp_7;
+  padding-top: $padding;
+  padding-bottom: $padding;
 }
 </style>
