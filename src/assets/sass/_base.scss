@@ -1,5 +1,9 @@
 @use "variables" as v;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: v.$co_fontBaseLight;
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
