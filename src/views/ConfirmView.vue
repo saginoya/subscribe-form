@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, inject } from "vue";
+import { useRouter } from "vue-router";
+import { ref, inject, onMounted } from "vue";
 import type { CustomerInfo, PostData } from "@/interfaces";
 
 // Layout components
@@ -15,6 +16,8 @@ import ElTextarea from "@/components/ElTextarea.vue";
 // Elemnt components
 import ElBtn from "@/components/ElBtn.vue";
 
+const mailSystemPass: string = import.meta.env.VITE_MAIL_SYSTEM;
+
 const customerInfo = inject<CustomerInfo>("customerInfo");
 const postData = inject<PostData>("postData");
 
@@ -29,13 +32,35 @@ const email = ref(customerInfo ? customerInfo.email : "");
 const dm = ref(customerInfo ? customerInfo.dm : "");
 const magazines = ref(postData ? postData.postMagazines : "");
 const remarks = ref(customerInfo ? customerInfo.remarks : "");
+
+const allRequiredItems = [
+  Boolean(name.value),
+  Boolean(businessType.value),
+  Boolean(postalCode.value),
+  Boolean(address.value),
+  Boolean(tel.value),
+  Boolean(email.value),
+  Boolean(magazines.value.length > 0),
+];
+const checkallRequiredItems = !allRequiredItems.includes(false);
+
+const router = useRouter();
+const returnHome = () => {
+  router.push("/");
+};
+onMounted(() => {
+  if (!checkallRequiredItems) {
+    alert("入力されていない必須項目があります。\n入力画面に戻ります。");
+    returnHome();
+  }
+});
 </script>
 
 <template>
   <LyCont>
     <BlContsUnit>
       <h2 class="el_lv2heading">入力内容の確認</h2>
-      <form method="post" action="/">
+      <form method="post" :action="mailSystemPass">
         <BlFieldset>
           <BlInputGroup
             label="ご契約者名"
@@ -122,7 +147,7 @@ const remarks = ref(customerInfo ? customerInfo.remarks : "");
           </BlInputGroup>
           <BlHorizBtnList>
             <li>
-              <ElBtn color="gray" @click="$router.push('/')">修正する</ElBtn>
+              <ElBtn color="gray" @click="returnHome()">修正する</ElBtn>
             </li>
             <li>
               <ElBtn type="submit">送信する</ElBtn>
