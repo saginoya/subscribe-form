@@ -44,6 +44,7 @@ const catInfo = (catId: string): CatInfo => {
       <BlCard
         :label="catInfo(magazine.cat).name"
         :label-color="catInfo(magazine.cat).color"
+        class="bl_cardMagazine"
       >
         <BlCardHeader>
           <p>
@@ -65,7 +66,7 @@ const catInfo = (catId: string): CatInfo => {
         <transition name="is_active">
           <BlCardBody
             v-show="magazine.buyInfo.buy"
-            class="bl_card_magazineBody"
+            class="bl_cardMagazine_body"
           >
             <p>
               <label>
@@ -105,6 +106,7 @@ const catInfo = (catId: string): CatInfo => {
 <style scoped lang="scss">
 @use "@/assets/sass/variables" as v;
 @use "@/assets/sass/mixin" as m;
+
 .bl_card_note {
   display: flex;
   align-items: center;
@@ -114,9 +116,17 @@ const catInfo = (catId: string): CatInfo => {
   font-size: 0.8rem;
   line-height: 1rem;
 }
-.bl_card_magazineBody {
-  @include m.bl_LyCol1(8px);
-  overflow: hidden;
+.bl_cardMagazine {
+  &:hover,
+  &:focus {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+    transition: all 0.25s;
+  }
+  &_body {
+    @include m.bl_LyCol1(8px);
+    overflow: hidden;
+  }
 }
 .el_inputMagazineNum {
   width: 5em;
