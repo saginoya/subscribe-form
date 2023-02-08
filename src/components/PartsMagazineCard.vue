@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { computed, inject } from "vue";
 import type { Magazine } from "@/interfaces";
 
 import BlCardUnit from "@/components/BlCardUnit.vue";
@@ -36,6 +36,18 @@ const catInfo = (catId: string): CatInfo => {
       };
   }
 };
+
+const numberOfBooksBuy = computed(() => {
+  let count: number = 0;
+  if (magazineList) {
+    for (const info of magazineList) {
+      if (info.buyInfo.buy === "購入") {
+        count++;
+      }
+    }
+  }
+  return count;
+});
 </script>
 
 <template>
@@ -52,6 +64,7 @@ const catInfo = (catId: string): CatInfo => {
               type="checkbox"
               :id="magazine.id"
               value="購入"
+              :required="numberOfBooksBuy === 0"
               :aria-describedby="`${magazine.id}-note`"
               v-model="magazine.buyInfo.buy"
             >
@@ -120,7 +133,6 @@ const catInfo = (catId: string): CatInfo => {
   &:hover,
   &:focus {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
-    transform: translateY(-1px);
     transition: all 0.25s;
   }
   &_body {
