@@ -12,12 +12,12 @@ const router = createRouter({
     {
       path: "/confirm",
       name: "confirm",
-      component: () => import("../views/ConfirmView.vue"),
+      component: () => import("@/views/ConfirmView.vue"),
     },
     {
       path: "/thanks",
       name: "thanks",
-      component: () => import("../views/ThanksView.vue"),
+      component: () => import("@/views/ThanksView.vue"),
     },
   ],
   scrollBehavior(to, from, savedPosition) {
