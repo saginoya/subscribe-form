@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { inject } from "vue";
-import { Core as YubinBangoCore } from "yubinbango-core2";
+import { computed, watch, watchEffect, inject } from "vue";
+import { fetchAddress } from "@/plugins/fetchAddress";
 import type { CustomerInfo } from "@/interfaces";
 
 // Layout components
@@ -16,6 +16,7 @@ import BlHorizBtnList from "@/components/BlHorizBtnList.vue";
 // Elemnt components
 import ElNote from "@/components/ElNote.vue";
 import ElBtn from "@/components/ElBtn.vue";
+import ElInput from "@/components/ElInput.vue";
 import ElInputRadio from "@/components/ElInputRadio.vue";
 import ElSelect from "@/components/ElSelect.vue";
 import ElTextarea from "@/components/ElTextarea.vue";
@@ -28,14 +29,9 @@ import PartsMagazineCard from "@/components/PartsMagazineCard.vue";
 
 const customerInfo = inject<CustomerInfo>("customerInfo");
 
-const fetchAddress = (): void => {
+const autoAddressInput = () => {
   if (customerInfo) {
-    new YubinBangoCore(customerInfo.postalCode, (value: any) => {
-      // region=都道府県, locality=市区町村, street=町域
-      const address = value.region + value.locality + value.street;
-
-      customerInfo.addressLevel = address;
-    });
+    customerInfo.addressLevel = fetchAddress(customerInfo.postalCode);
   }
 };
 </script>
@@ -122,19 +118,19 @@ const fetchAddress = (): void => {
           <template v-slot:title>
             <h2 class="el_lv2heading">発送先ご住所</h2>
           </template>
-          <BlInputGroup
-            label="郵便番号"
-            id="postal-code"
-            :required="true"
-            type="text"
-            autocomplete="postal-code"
-            inputmode="numeric"
-            placeholder="101-0061"
-            pattern="^[0-9]{3}-[0-9]{4}$"
-            title="半角数字とハイフン（-）で入力してください"
-            v-model.trim="customerInfo.postalCode"
-            :blur="fetchAddress()"
-          >
+          <BlInputGroup label="郵便番号" id="postal-code" :required="true">
+            <ElInput
+              id="postal-code"
+              :required="true"
+              type="text"
+              autocomplete="postal-code"
+              inputmode="numeric"
+              placeholder="101-0061"
+              pattern="^[0-9]{3}-[0-9]{4}$"
+              title="半角数字とハイフン（-）で入力してください"
+              v-model.trim="customerInfo.postalCode"
+              @change="autoAddressInput"
+            ></ElInput>
           </BlInputGroup>
           <BlInputGroup
             label="都道府県・市町村"
