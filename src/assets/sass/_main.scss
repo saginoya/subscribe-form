@@ -1,8 +1,13 @@
 @use "variables" as v;
 @use "mixin" as m;
 
-body.is_scrollLock {
-  overflow-y: hidden;
+body {
+  &.is_scrollLock {
+    overflow-y: hidden;
+  }
+}
+#app {
+  min-height: 100vh;
 }
 .ly_header {
   padding-top: v.$sp_3;
@@ -12,6 +17,8 @@ body.is_scrollLock {
   @include m.ly_centered;
 }
 .ly_footer {
+  position: sticky;
+  top: 100vh;
   padding-top: v.$sp_3;
   padding-bottom: v.$sp_3;
   background-color: v.$co_primary;
