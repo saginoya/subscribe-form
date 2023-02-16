@@ -17,8 +17,8 @@ const onInputText = (e: Event) => {
 
 <template>
   <textarea
-    :name="props.id"
-    :id="props.name || props.id"
+    :id="props.id"
+    :name="props.name || props.id"
     class="el_textareaBase"
     :required="props.required"
     :aria-required="props.required"
