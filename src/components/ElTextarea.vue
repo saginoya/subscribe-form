@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   id: string;
+  name?: string;
   required?: boolean;
   modelValue?: string;
 }>();
@@ -17,7 +18,7 @@ const onInputText = (e: Event) => {
 <template>
   <textarea
     :name="props.id"
-    :id="props.id"
+    :id="props.name || props.id"
     class="el_textareaBase"
     :required="props.required"
     :aria-required="props.required"

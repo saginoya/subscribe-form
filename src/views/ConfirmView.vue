@@ -64,6 +64,7 @@ onMounted(() => {
         <BlFieldset>
           <BlInputGroup
             label="ご契約者名"
+            name="ご契約者名"
             id="post-name"
             type="text"
             required
@@ -72,6 +73,7 @@ onMounted(() => {
           ></BlInputGroup>
           <BlInputGroup
             label="部署・ご担当者様"
+            name="部署・ご担当者様"
             id="post-department"
             type="text"
             v-model="department"
@@ -79,6 +81,7 @@ onMounted(() => {
           ></BlInputGroup>
           <BlInputGroup
             label="業種"
+            name="業種"
             id="post-business-type"
             type="text"
             required
@@ -87,6 +90,7 @@ onMounted(() => {
           ></BlInputGroup>
           <BlInputGroup
             label="郵便番号"
+            name="郵便番号"
             id="post-postal-code"
             type="text"
             required
@@ -95,6 +99,7 @@ onMounted(() => {
           ></BlInputGroup>
           <BlInputGroup
             label="ご住所"
+            name="ご住所"
             id="post-address"
             type="text"
             required
@@ -103,6 +108,7 @@ onMounted(() => {
           ></BlInputGroup>
           <BlInputGroup
             label="電話番号"
+            name="電話番号"
             id="post-tel"
             type="text"
             required
@@ -111,6 +117,7 @@ onMounted(() => {
           ></BlInputGroup>
           <BlInputGroup
             label="FAX番号"
+            name="FAX番号"
             id="post-fax"
             type="text"
             v-model="fax"
@@ -118,6 +125,7 @@ onMounted(() => {
           ></BlInputGroup>
           <BlInputGroup
             label="メールアドレス"
+            name="メールアドレス"
             id="post-email"
             type="text"
             required
@@ -126,6 +134,7 @@ onMounted(() => {
           ></BlInputGroup>
           <BlInputGroup
             label="DMのご希望"
+            name="DMのご希望"
             id="post-dm"
             type="text"
             v-model="dm"
@@ -135,6 +144,7 @@ onMounted(() => {
             v-for="(magazine, index) in magazines"
             :key="`magazine${index}`"
             :label="`ご希望の新聞・雑誌${index + 1}`"
+            :name="`ご希望の新聞・雑誌${index + 1}`"
             :id="`post-magazines${index}`"
             type="text"
             :required="index === 0"
@@ -142,7 +152,13 @@ onMounted(() => {
             readonly
           ></BlInputGroup>
           <BlInputGroup label="備考欄">
-            <ElTextarea id="post-remarks" rows="5" v-model="remarks" readonly>
+            <ElTextarea
+              id="post-remarks"
+              name="備考欄"
+              rows="5"
+              v-model="remarks"
+              readonly
+            >
             </ElTextarea>
           </BlInputGroup>
           <BlHorizBtnList>

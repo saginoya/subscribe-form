@@ -5,6 +5,7 @@ import ElInput from "@/components/ElInput.vue";
 const props = defineProps<{
   label: string;
   id?: string;
+  name?: string;
   required?: boolean;
   type?:
     | "email"
@@ -57,6 +58,7 @@ const onInputText = (e: Event) => {
           v-if="props.type && props.id"
           :type="props.type"
           :inputmode="props.inputmode"
+          :name="props.name"
           :id="props.id"
           :autocomplete="props.autocomplete"
           :placeholder="props.placeholder"

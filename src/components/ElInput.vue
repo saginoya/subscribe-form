@@ -19,6 +19,7 @@ type Props = {
     | "url"
     | "week";
   id: string;
+  name?: string;
   required?: boolean;
   inline?: boolean;
   modelValue?: string | number;
@@ -58,7 +59,7 @@ const classObject = computed(() => {
 <template>
   <input
     :type="props.type"
-    :name="props.id"
+    :name="props.name || props.id"
     :id="props.id"
     :class="classObject"
     :required="props.required"
