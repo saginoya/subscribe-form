@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch, watchEffect, inject } from "vue";
+import { inject } from "vue";
 import { fetchAddress } from "@/plugins/fetchAddress";
 import type { CustomerInfo } from "@/interfaces";
 
