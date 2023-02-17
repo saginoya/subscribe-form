@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { inject } from "vue";
-import { fetchAddress } from "@/plugins/fetchAddress";
 import type { CustomerInfo } from "@/interfaces";
 
 // Layout components
@@ -29,9 +28,22 @@ import PartsMagazineCard from "@/components/PartsMagazineCard.vue";
 
 const customerInfo = inject<CustomerInfo>("customerInfo");
 
-const autoAddressInput = () => {
+const autoAddressInput = async () => {
   if (customerInfo) {
-    customerInfo.addressLevel = fetchAddress(customerInfo.postalCode);
+    const url = new URL("https://zipcloud.ibsnet.co.jp/api/search");
+    const params = new URLSearchParams({ zipcode: customerInfo.postalCode });
+    url.search = String(params);
+
+    const response = await fetch(url.href);
+    const data = await response.json();
+
+    if (response.status !== 200) return;
+
+    const address =
+      data.results[0].address1 +
+      data.results[0].address2 +
+      data.results[0].address3;
+    customerInfo.addressLevel = address;
   }
 };
 </script>
@@ -129,7 +141,7 @@ const autoAddressInput = () => {
               pattern="^[0-9]{3}-[0-9]{4}$"
               title="半角数字とハイフン（-）で入力してください"
               v-model.trim="customerInfo.postalCode"
-              @change="autoAddressInput"
+              @blur="autoAddressInput()"
             ></ElInput>
           </BlInputGroup>
           <BlInputGroup

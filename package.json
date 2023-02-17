@@ -19,8 +19,7 @@
     "mdi-vue": "^3.0.13",
     "vue": "^3.2.45",
     "vue-axios": "^3.5.2",
-    "vue-router": "^4.1.6",
-    "yubinbango-core2": "^0.6.3"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
