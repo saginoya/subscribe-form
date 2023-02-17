@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { ref, inject, onMounted } from "vue";
+import axios from "axios";
 import type { CustomerInfo, PostData } from "@/interfaces";
 
 // Layout components
@@ -12,6 +13,7 @@ import BlFieldset from "@/components/BlFieldset.vue";
 import BlInputGroup from "@/components/BlInputGroup.vue";
 import BlHorizBtnList from "@/components/BlHorizBtnList.vue";
 import ElTextarea from "@/components/ElTextarea.vue";
+import ElError from "@/components/ElError.vue";
 
 // Elemnt components
 import ElBtn from "@/components/ElBtn.vue";
@@ -54,13 +56,57 @@ onMounted(() => {
     returnHome();
   }
 });
+
+const result = ref<string>();
+const send = async (parms: FormData) => {
+  const url = mailSystemPass;
+
+  return await axios
+    .post(url, parms)
+    .then(function (res) {
+      return res.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};
+const submit = async () => {
+  const formData = new FormData();
+  formData.append("ご契約者名", name.value);
+  formData.append("部署・ご担当者様", department.value);
+  formData.append("業種", businessType.value);
+  formData.append("郵便番号", postalCode.value);
+  formData.append("ご住所", address.value);
+  formData.append("電話番号", tel.value);
+  formData.append("FAX番号", fax.value);
+  formData.append("メールアドレス", email.value);
+  formData.append("DMのご希望", dm.value);
+  for (let i = 0; i < 7; i++) {
+    const value = magazines.value[i];
+    if (value) {
+      formData.append(`ご希望の新聞・雑誌${i + 1}`, value);
+    }
+  }
+  formData.append("備考欄", remarks.value);
+
+  const sendResult = await send(formData);
+  result.value = sendResult;
+  if (sendResult === "送信完了") {
+    router.push("/thanks");
+  }
+};
 </script>
 
 <template>
   <LyCont>
     <BlContsUnit>
       <h2 class="el_lv2heading">入力内容の確認</h2>
-      <form method="post" :action="mailSystemPass">
+      <form
+        id="confirmForm"
+        method="post"
+        @submit.prevent="submit()"
+        action="/"
+      >
         <BlFieldset>
           <BlInputGroup
             label="ご契約者名"
@@ -171,6 +217,9 @@ onMounted(() => {
           </BlHorizBtnList>
         </BlFieldset>
       </form>
+      <transition name="fade">
+        <ElError v-if="result" class="contact-result">{{ result }}</ElError>
+      </transition>
     </BlContsUnit>
   </LyCont>
 </template>
