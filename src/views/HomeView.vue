@@ -191,7 +191,6 @@ const autoAddressInput = () => {
             <ElNote id="aboutRemarks">
               連絡事項があればご記入ください。（請求先・送付先を別途ご指定など）
             </ElNote>
-            <p>{{ customerInfo.remarks }}</p>
           </BlInputGroup>
         </BlFieldset>
         <BlHorizBtnList>

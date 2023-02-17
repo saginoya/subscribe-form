@@ -10,7 +10,6 @@ const emits = defineEmits<{ (e: "update:modelValue", text: string): void }>();
 
 const onInputText = (e: Event) => {
   const target = e.target as HTMLInputElement;
-  console.log(target);
   emits("update:modelValue", target.value);
 };
 </script>
