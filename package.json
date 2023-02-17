@@ -14,9 +14,11 @@
   "dependencies": {
     "@mdi/js": "^7.1.96",
     "autoprefixer": "^10.4.13",
+    "axios": "^1.3.3",
     "css-wipe": "^4.3.0",
     "mdi-vue": "^3.0.13",
     "vue": "^3.2.45",
+    "vue-axios": "^3.5.2",
     "vue-router": "^4.1.6",
     "yubinbango-core2": "^0.6.3"
   },
