@@ -56,7 +56,7 @@ const autoAddressInput = async () => {
       <PartsContacts></PartsContacts>
     </BlContsUnit>
   </LyCont>
-  <LyCont class="hp_bgcBase" v-if="customerInfo">
+  <LyCont v-if="customerInfo" class="hp_bgcBase" data-testid="form-body">
     <form method="post" @submit.prevent="$router.push('confirm')" action="/">
       <BlFormItemUnit>
         <BlFieldset>
@@ -133,6 +133,7 @@ const autoAddressInput = async () => {
           <BlInputGroup label="郵便番号" id="postal-code" :required="true">
             <ElInput
               id="postal-code"
+              data-testid="postal-code"
               :required="true"
               type="text"
               autocomplete="postal-code"
@@ -147,6 +148,7 @@ const autoAddressInput = async () => {
           <BlInputGroup
             label="都道府県・市町村"
             id="address-level"
+            data-testid="address-level"
             :required="true"
             type="text"
             autocomplete="address-level1 address-level2"
@@ -213,7 +215,7 @@ const autoAddressInput = async () => {
       </BlFormItemUnit>
     </form>
   </LyCont>
-  <LyCont v-else>
+  <LyCont v-else data-testid="form-body-error">
     <p>エラー：入力フォームが正しく読み込まれませんでした。</p>
   </LyCont>
 </template>
