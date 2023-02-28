@@ -112,6 +112,7 @@ const autoAddressInput = async () => {
               autocomplete="tel-national"
               inputmode="tel"
               placeholder="03-3262-3465"
+              pattern="\d{2,4}-?\d{2,4}-?\d{3,4}"
               v-model.trim="customerInfo.tel"
             ></ElInput
           ></BlInputGroup>
@@ -121,6 +122,7 @@ const autoAddressInput = async () => {
               type="tel"
               inputmode="tel"
               placeholder="03-3263-2560"
+              pattern="\d{2,4}-?\d{2,4}-?\d{3,4}"
               v-model.trim="customerInfo.fax"
             ></ElInput
           ></BlInputGroup>
@@ -149,7 +151,7 @@ const autoAddressInput = async () => {
               autocomplete="postal-code"
               inputmode="numeric"
               placeholder="101-0061"
-              pattern="^[0-9]{3}-[0-9]{4}$"
+              pattern="\d{3}-?\d{4}"
               title="半角数字とハイフン（-）で入力してください"
               v-model.trim="customerInfo.postalCode"
               @blur="autoAddressInput()"
