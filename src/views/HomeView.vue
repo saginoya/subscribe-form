@@ -65,29 +65,36 @@ const autoAddressInput = async () => {
           </template>
           <BlInputGroup
             label="個人氏名・ご担当者様氏名"
-            id="name"
             :required="true"
-            type="text"
-            autocomplete="name"
-            placeholder="日報太郎"
-            v-model.trim="customerInfo.name"
+            for="name"
+          >
+            <ElInput
+              type="text"
+              id="name"
+              :required="true"
+              autocomplete="name"
+              placeholder="日報太郎"
+              v-model.trim="customerInfo.name"
+            ></ElInput>
+          </BlInputGroup>
+          <BlInputGroup label="企業名・団体名" for="organization">
+            <ElInput
+              id="organization"
+              type="text"
+              autocomplete="organization"
+              placeholder="株式会社日報ビジネス"
+              v-model.trim="customerInfo.organization"
+            ></ElInput>
+          </BlInputGroup>
+          <BlInputGroup label="所属部署など" for="department"
+            ><ElInput
+              id="department"
+              type="text"
+              placeholder="出版部"
+              v-model.trim="customerInfo.department"
+            ></ElInput
           ></BlInputGroup>
-          <BlInputGroup
-            label="企業名・団体名"
-            id="organization"
-            type="text"
-            autocomplete="organization"
-            placeholder="株式会社日報ビジネス"
-            v-model.trim="customerInfo.organization"
-          ></BlInputGroup>
-          <BlInputGroup
-            label="所属部署など"
-            id="department"
-            type="text"
-            placeholder="出版部"
-            v-model.trim="customerInfo.department"
-          ></BlInputGroup>
-          <BlInputGroup label="業種" id="business-type" :required="true">
+          <BlInputGroup label="業種" :required="true" for="business-type">
             <ElSelect
               id="business-type"
               v-model="customerInfo.businessType"
@@ -97,40 +104,43 @@ const autoAddressInput = async () => {
               <PartsBusinessTypeSelect></PartsBusinessTypeSelect>
             </ElSelect>
           </BlInputGroup>
-          <BlInputGroup
-            label="電話番号"
-            id="tel"
-            :required="true"
-            type="tel"
-            autocomplete="tel-national"
-            inputmode="tel"
-            placeholder="03-3262-3465"
-            v-model.trim="customerInfo.tel"
+          <BlInputGroup label="電話番号" :required="true" for="tel"
+            ><ElInput
+              id="tel"
+              :required="true"
+              type="tel"
+              autocomplete="tel-national"
+              inputmode="tel"
+              placeholder="03-3262-3465"
+              v-model.trim="customerInfo.tel"
+            ></ElInput
           ></BlInputGroup>
-          <BlInputGroup
-            label="FAX番号"
-            id="fax"
-            type="tel"
-            inputmode="tel"
-            placeholder="03-3263-2560"
-            v-model.trim="customerInfo.fax"
+          <BlInputGroup label="FAX番号" for="fax"
+            ><ElInput
+              id="fax"
+              type="tel"
+              inputmode="tel"
+              placeholder="03-3263-2560"
+              v-model.trim="customerInfo.fax"
+            ></ElInput
           ></BlInputGroup>
-          <BlInputGroup
-            label="メールアドレス"
-            id="email"
-            :required="true"
-            type="email"
-            autocomplete="email"
-            inputmode="email"
-            placeholder="sample@sample.com"
-            v-model.trim="customerInfo.email"
+          <BlInputGroup label="メールアドレス" :required="true" for="email"
+            ><ElInput
+              id="email"
+              :required="true"
+              type="email"
+              autocomplete="email"
+              inputmode="email"
+              placeholder="sample@sample.com"
+              v-model.trim="customerInfo.email"
+            ></ElInput
           ></BlInputGroup>
         </BlFieldset>
         <BlFieldset>
           <template v-slot:title>
             <h2 class="el_lv2heading">発送先ご住所</h2>
           </template>
-          <BlInputGroup label="郵便番号" id="postal-code" :required="true">
+          <BlInputGroup label="郵便番号" :required="true" for="postal-code">
             <ElInput
               id="postal-code"
               data-testid="postal-code"
@@ -147,30 +157,39 @@ const autoAddressInput = async () => {
           </BlInputGroup>
           <BlInputGroup
             label="都道府県・市町村"
-            id="address-level"
-            data-testid="address-level"
             :required="true"
-            type="text"
-            autocomplete="address-level1 address-level2"
-            placeholder="東京都千代田区神田三崎町"
-            v-model.trim="customerInfo.addressLevel"
+            for="address-level"
+            ><ElInput
+              id="address-level"
+              data-testid="address-level"
+              :required="true"
+              type="text"
+              autocomplete="address-level1 address-level2"
+              placeholder="東京都千代田区神田三崎町"
+              v-model.trim="customerInfo.addressLevel"
+            ></ElInput
           ></BlInputGroup>
           <BlInputGroup
             label="番地・丁目・号など"
-            id="address-line1"
             :required="true"
-            type="text"
-            autocomplete="address-line1"
-            placeholder="3-1-5"
-            v-model.trim="customerInfo.addressLine1"
+            for="address-line1"
+            ><ElInput
+              id="address-line1"
+              :required="true"
+              type="text"
+              autocomplete="address-line1"
+              placeholder="3-1-5"
+              v-model.trim="customerInfo.addressLine1"
+            ></ElInput
           ></BlInputGroup>
-          <BlInputGroup
-            label="建物名・部屋番号など"
-            id="address-line2"
-            type="text"
-            autocomplete="address-line2"
-            placeholder="神田三崎町ビル1階"
-            v-model.trim="customerInfo.addressLine2"
+          <BlInputGroup label="建物名・部屋番号など" for="address-line2"
+            ><ElInput
+              id="address-line2"
+              type="text"
+              autocomplete="address-line2"
+              placeholder="神田三崎町ビル1階"
+              v-model.trim="customerInfo.addressLine2"
+            ></ElInput
           ></BlInputGroup>
         </BlFieldset>
         <BlFieldset>
@@ -194,7 +213,7 @@ const autoAddressInput = async () => {
               日報グループの業務のご案内をさせていただくことがあります。
             </ElNote>
           </BlInputGroup>
-          <BlInputGroup label="備考欄" id="remarks">
+          <BlInputGroup label="備考欄" for="remarks">
             <ElTextarea
               id="remarks"
               rows="5"

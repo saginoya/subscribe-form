@@ -49,8 +49,7 @@ const onBlurText = (e: Event) => {
 
 const classObject = computed(() => {
   return {
-    el_inputBase: !props.inline,
-    el_inputInline: props.inline,
+    hp_fullWidth: !props.inline,
     is_error: statusError.value,
   };
 });
@@ -61,6 +60,7 @@ const classObject = computed(() => {
     :type="props.type"
     :name="props.name || props.id"
     :id="props.id"
+    class="el_inputBase"
     :class="classObject"
     :required="props.required"
     :aria-required="props.required"
@@ -74,18 +74,16 @@ const classObject = computed(() => {
 @use "@/assets/sass/variables" as v;
 @use "@/assets/sass/mixin" as m;
 
-$color-error: v.$co_error;
-$color-error: red !default;
 .el_inputBase {
   @include m.el_input;
-  width: 100%;
   appearance: none;
-}
-.el_inputInline {
-  @include m.el_input;
-  appearance: none;
-}
-.is_error {
-  box-shadow: 0 0 0 1px $color-error inset;
+  &.hp_fullWidth {
+    width: 100%;
+  }
+  &.is_error {
+    $color: v.$co_error;
+    $color: red !default;
+    box-shadow: 0 0 0 1px $color inset;
+  }
 }
 </style>
