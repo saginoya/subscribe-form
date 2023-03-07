@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { inject } from "vue";
+import { searchAddress } from "@/functions/searchAddress";
 import type { CustomerInfo } from "@/interfaces";
 
 // Layout components
@@ -28,22 +29,15 @@ import PartsMagazineCard from "@/components/PartsMagazineCard.vue";
 
 const customerInfo = inject<CustomerInfo>("customerInfo");
 
-const autoAddressInput = async () => {
+const autoAddressInput = () => {
   if (customerInfo) {
-    const url = new URL("https://zipcloud.ibsnet.co.jp/api/search");
-    const params = new URLSearchParams({ zipcode: customerInfo.postalCode });
-    url.search = String(params);
-
-    const response = await fetch(url.href);
-    const data = await response.json();
-
-    if (response.status !== 200) return;
-
-    const address =
-      data.results[0].address1 +
-      data.results[0].address2 +
-      data.results[0].address3;
-    customerInfo.addressLevel = address;
+    searchAddress(customerInfo.postalCode)
+      .then((address) => {
+        customerInfo.addressLevel = String(address);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 };
 </script>
