@@ -152,7 +152,7 @@ const autoAddressInput = () => {
             ></ElInput>
           </BlInputGroup>
           <BlInputGroup
-            label="都道府県・市町村"
+            label="都道府県・区市町村"
             :required="true"
             for="address-level"
             ><ElInput
