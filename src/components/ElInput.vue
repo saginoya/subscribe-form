@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-type Props = {
+type Props<T extends string | number> = {
   type:
     | "email"
     | "color"
@@ -22,10 +22,10 @@ type Props = {
   name?: string;
   required?: boolean;
   inline?: boolean;
-  modelValue?: string | number;
+  modelValue?: T;
 };
 
-const props = defineProps<Props>();
+const props = defineProps<Props<string | number>>();
 const emits = defineEmits<{
   (e: "update:modelValue", text: string | number): void;
 }>();
