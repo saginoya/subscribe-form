@@ -1,30 +1,33 @@
-export const searchAddress = (postalCode: string) => {
-  const pattern = /\d{3}-?\d{4}/;
-  if (!pattern.test(postalCode)) {
-    return Promise.reject(new Error("Invalid Postal Code"));
-  }
+interface AddressResult {
+  message: string | null;
+  results: {
+    address1: string;
+    address2: string;
+    address3: string;
+  }[];
+  status: number;
+}
 
-  return new Promise((resolve, reject) => {
+export const searchAddress = async (postalCode: string): Promise<string> => {
+  try {
     const url = `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${postalCode}`;
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", url);
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        if (response.results) {
-          const result = response.results[0];
-          const address = `${result.address1}${result.address2}${result.address3}`;
-          resolve(address);
-        } else {
-          reject(new Error("Not Found"));
-        }
-      } else {
-        reject(new Error(xhr.statusText));
-      }
-    };
-    xhr.onerror = () => {
-      reject(new Error(xhr.statusText));
-    };
-    xhr.send();
-  });
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
+    }
+    const json = (await response.json()) as AddressResult;
+    if (
+      json.status !== 200 ||
+      json.message ||
+      !json.results ||
+      json.results.length === 0
+    ) {
+      throw new Error("Not Found");
+    }
+    const result = json.results[0];
+    const address = `${result.address1}${result.address2}${result.address3}`;
+    return address;
+  } catch (error: any) {
+    throw new Error(`Failed to retrieve address: ${error.message}`);
+  }
 };
