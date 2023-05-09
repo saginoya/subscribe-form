@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue";
+
 type Props = {
   id: string;
   value: string;
@@ -10,10 +12,20 @@ type Props = {
 const props = defineProps<Props>();
 const emits = defineEmits<{ (e: "update:modelValue", text: string): void }>();
 
-const onInputText = (e: Event) => {
+const onInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
   emits("update:modelValue", target.value);
 };
+
+const isChecked = computed((): boolean => {
+  if (props.modelValue) {
+    return props.value === props.modelValue;
+  } else if (props.checked) {
+    return props.checked;
+  } else {
+    return false;
+  }
+});
 </script>
 
 <template>
@@ -26,8 +38,8 @@ const onInputText = (e: Event) => {
       :value="props.value"
       :required="props.required"
       :aria-required="props.required"
-      :checked="props.value === props.modelValue"
-      @input="onInputText"
+      :checked="isChecked"
+      @input="onInput"
     />
     <slot></slot>
   </label>
