@@ -2,7 +2,7 @@
 import { useRouter } from "vue-router";
 import { ref, inject, onMounted } from "vue";
 import axios from "axios";
-import type { CustomerInfo, PostData } from "@/interfaces";
+import type { CustomerInfo, PostData } from "@/types";
 
 // Layout components
 import LyCont from "@/components/LyCont.vue";

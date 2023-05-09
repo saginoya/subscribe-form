@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import { reactive, computed, provide } from "vue";
-import type { CustomerInfo } from "@/interfaces";
 import { useStoreMagazines } from "@/stores/magazines";
 import { useStoreShoppingCart } from "@/stores/shoppingCart";
+import type { CustomerInfo } from "@/types";
 
 const storeMagazines = useStoreMagazines();
 const shoppingCart = useStoreShoppingCart().cart;
@@ -58,6 +58,8 @@ const postAddress = computed((): string => {
   const building = addressLine2 && ` ${addressLine2}`;
   return addressLevel + toHalfWidth(addressLine1) + toHalfWidth(building);
 });
+
+// ショッピングカートの情報からテキストを算定
 const postMagazines = computed((): string[] => {
   let itemList: string[] = [];
   shoppingCart.forEach((item) => {

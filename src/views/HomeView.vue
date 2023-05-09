@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { inject } from "vue";
 import { searchAddress } from "@/functions/searchAddress";
-import type { CustomerInfo } from "@/interfaces";
+import type { CustomerInfo } from "@/types";
 
 // Layout components
 import LyCont from "@/components/LyCont.vue";
