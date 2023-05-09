@@ -2,7 +2,6 @@
 import { inject } from "vue";
 import { searchAddress } from "@/functions/searchAddress";
 import type { CustomerInfo } from "@/interfaces";
-import { useStoreCounter } from "@/stores/magazines";
 
 // Layout components
 import LyCont from "@/components/LyCont.vue";
@@ -28,8 +27,6 @@ import PartsContacts from "@/components/PartsContacts.vue";
 import PartsBusinessTypeSelect from "@/components/PartsBusinessTypeSelect.vue";
 import PartsMagazineCard from "@/components/PartsMagazineCard.vue";
 
-const counter = useStoreCounter();
-
 const customerInfo = inject<CustomerInfo>("customerInfo");
 
 const autoAddressInput = () => {
@@ -54,7 +51,6 @@ const autoAddressInput = () => {
     </BlContsUnit>
   </LyCont>
   <LyCont v-if="customerInfo" class="hp_bgcBase" data-testid="form-body">
-    <p>Count:{{ counter.count }}</p>
     <form method="post" @submit.prevent="$router.push('confirm')" action="/">
       <BlFormItemUnit>
         <BlFieldset>

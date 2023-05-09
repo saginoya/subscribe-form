@@ -1,64 +1,12 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import { reactive, computed, provide } from "vue";
-import type { CustomerInfo, Magazine } from "@/interfaces";
+import type { CustomerInfo } from "@/interfaces";
+import { useStoreMagazines } from "@/stores/magazines";
+import { useStoreShoppingCart } from "@/stores/shoppingCart";
 
-// 販売している媒体の一覧
-const magazineList: Magazine[] = reactive([
-  {
-    id: "ht",
-    name: "週刊 包装タイムス",
-    explanation: "包装タイムスは1966年創刊の包装専門新聞です",
-    cat: "hoso",
-    buyInfo: { buy: "", month: "", number: 1 },
-  },
-  {
-    id: "fp",
-    name: "月刊 食品包装",
-    explanation: "食品包装の専門情報誌",
-    cat: "hoso",
-    buyInfo: { buy: "", month: "", number: 1 },
-  },
-  {
-    id: "cb",
-    name: "月刊 カートンボックス",
-    explanation: "「箱創り」を応援するビジネスマッチングマガジン",
-    cat: "hoso",
-    buyInfo: { buy: "", month: "", number: 1 },
-  },
-  {
-    id: "jk",
-    name: "週刊 循環経済新聞",
-    explanation: "処理・処分から資源循環、環境保全まで幅広く紹介した新聞",
-    cat: "kankyo",
-    buyInfo: { buy: "", month: "", number: 1 },
-  },
-  {
-    id: "rd",
-    name: "月刊 廃棄物",
-    explanation:
-      "ごみ処理・リサイクルの実際的な解決方法を具体的に紹介する廃棄物問題の総合誌",
-    cat: "kankyo",
-    buyInfo: { buy: "", month: "", number: 1 },
-  },
-  {
-    id: "ec",
-    name: "隔月刊 イーコンテクチャー",
-    explanation: "建廃・解体・エコ施工の専門誌",
-    cat: "kankyo",
-    buyInfo: { buy: "", month: "", number: 1 },
-    bimonthly: true,
-  },
-  {
-    id: "gw",
-    name: "隔月刊 地球温暖化",
-    explanation: "「脱炭素社会実現」を目指す提言誌",
-    cat: "kankyo",
-    buyInfo: { buy: "", month: "", number: 1 },
-    bimonthly: true,
-  },
-]);
-provide("magazineList", magazineList);
+const storeMagazines = useStoreMagazines();
+const shoppingCart = useStoreShoppingCart().cart;
 
 // フォームから入力してもらう値の初期設定
 const customerInfo = reactive<CustomerInfo>({
@@ -112,15 +60,14 @@ const postAddress = computed((): string => {
 });
 const postMagazines = computed((): string[] => {
   let itemList: string[] = [];
-  magazineList.forEach((item) => {
-    if (item.buyInfo.buy === "購入") {
-      const name = item.name;
-      const month = item.buyInfo.month
-        ? `購読開始月：${item.buyInfo.month}`
-        : "";
-      const number = `部数：${item.buyInfo.number}`;
-      const buyInfo = month
-        ? `（${[month, number].join("・")}）`
+  shoppingCart.forEach((item) => {
+    const magazineInfo = storeMagazines.getItem(item.id);
+    if (magazineInfo) {
+      const name = magazineInfo.name;
+      const volume = item.volume ? `購読開始月：${item.volume}` : "";
+      const number = `部数：${item.number}`;
+      const buyInfo = volume
+        ? `（${[volume, number].join("・")}）`
         : `（${number}）`;
       const text = name + buyInfo;
       itemList.push(text);
