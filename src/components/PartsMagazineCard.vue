@@ -20,23 +20,30 @@ type CatInfo = {
   name: string;
   color: string;
 };
-const catInfo = (catId: string): CatInfo => {
-  switch (catId) {
-    case "kankyo":
-      return {
-        name: "環境",
-        color: "green",
-      };
-    case "hoso":
-      return {
-        name: "包装",
-        color: "blue",
-      };
-    default:
-      return {
-        name: "その他",
-        color: "",
-      };
+const catInfo = (catId: string[]): CatInfo => {
+  if (catId.length === 1) {
+    switch (catId[0]) {
+      case "kankyo":
+        return {
+          name: "環境",
+          color: "green",
+        };
+      case "hoso":
+        return {
+          name: "包装",
+          color: "blue",
+        };
+      default:
+        return {
+          name: "その他",
+          color: "",
+        };
+    }
+  } else {
+    return {
+      name: "その他",
+      color: "",
+    };
   }
 };
 
@@ -65,8 +72,8 @@ const changeVolume = (id: string, e: Event): void => {
   <BlCardUnit class="bl_cardUnitCol3">
     <li v-for="[id, magazine] in magazineList" :key="id">
       <BlCard
-        :label="catInfo(magazine.cat[0]).name"
-        :label-color="catInfo(magazine.cat[0]).color"
+        :label="catInfo(magazine.cat).name"
+        :label-color="catInfo(magazine.cat).color"
         class="bl_cardMagazine"
       >
         <BlCardHeader>

@@ -1,33 +1,5 @@
 import { defineStore } from "pinia";
-
-type MagazineCat = "general" | "hoso" | "kankyo";
-
-type Magazine = {
-  id: string;
-  cat: MagazineCat[];
-  name: string;
-  explanation: string;
-  saleType: "subscription" | "single";
-};
-
-type subscriptionMagazine = {
-  id: string;
-  cat: MagazineCat[];
-  name: string;
-  explanation: string;
-  saleType: "subscription";
-  annualPrice: number;
-  published: "monthly" | "bimonthly" | "weekly";
-};
-
-type singleMagazine = {
-  id: string;
-  cat: MagazineCat[];
-  name: string;
-  explanation: string;
-  saleType: "single";
-  price: number;
-};
+import type { Magazine, subscriptionMagazine, singleMagazine } from "@/types";
 
 type State = {
   magazineList: Map<string, subscriptionMagazine | singleMagazine>;
